@@ -39,7 +39,9 @@ module.exports = {
         64: ["4rem", "4.375rem"],
       },
       colors: {
-        obiBlue: {},
+        obiRed: {
+          500: "#C30913",
+        },
       },
       width: {
         600: "600px",
