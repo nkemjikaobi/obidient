@@ -8,7 +8,7 @@ import { ButtonProperties } from "@shared/libs/helpers";
 
 const DesktopNavigation = () => {
   return (
-    <div className="flex justify-between items-center h-24 -ml-[50vw] left-[50%] relative w-screen px-16 bigLaptop:px-20 bg-white py-[106px]">
+    <div className="flex justify-between items-center h-24 -ml-[50vw] left-[50%] relative w-screen px-16 bigLaptop:px-20 television:pl-64 television:pr-40 bg-white py-[106px]">
       <CustomLink destination="/">
         <Logo />
       </CustomLink>
@@ -23,7 +23,7 @@ const DesktopNavigation = () => {
         <>
           <li>
             <CustomButton
-              customClass="!rounded-[5px] !bg-white border border-black text-black ml-[113px] mr-[43px]"
+              customClass="!rounded-[5px] !bg-white border border-black !text-black ml-[113px] mr-[43px]"
               handleClick={() => {}}
               size={ButtonProperties.SIZES.small}
               title="Sign In"

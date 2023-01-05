@@ -42,6 +42,21 @@ module.exports = {
         obiRed: {
           500: "#C30913",
         },
+        obiGray: {
+          200: "#4F4F4F",
+          250: "#FCFCFC",
+          300: "#605B5B",
+          400: "#353535",
+        },
+        obiGreen: {
+          500: "#12791B",
+        },
+        gradient: {
+          keyFeature: "rgba(0, 0, 0, 0.23) 0.07%, #000000 87.45%)",
+        },
+      },
+      boxShadow: {
+        "get-started-card": "0px 10px 15px -3px rgba(0, 0, 0, 0.1), 0px 4px 6px -2px rgba(0, 0, 0, 0.05)",
       },
       width: {
         600: "600px",
