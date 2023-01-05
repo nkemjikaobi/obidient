@@ -1,8 +1,8 @@
 import Head from "next/head";
 import React from "react";
 
-// import DesktopFooter from "../Footer/DesktopFooter";
 // import MobileFooter from "../Footer/MobileFooter";
+import DesktopFooter from "../Footer/DesktopFooter/DesktopFooter";
 import DesktopNavigation from "../NavBar/DesktopNavigation";
 // import MobileNavigation from "../NavBar/MobileNavigation";
 
@@ -35,7 +35,9 @@ const BasePageLayout = ({ children, showNavigation, showFooter, title, descripti
         <main className="h-auto">{children}</main>
         {showFooter && (
           <>
-            <div className="hidden smallLaptop:block smallLaptop:w-full">{/* <DesktopFooter /> */}</div>
+            <div className="hidden smallLaptop:block smallLaptop:w-full">
+              <DesktopFooter />
+            </div>
             <div className="block w-full smallLaptop:hidden">{/* <MobileFooter /> */}</div>
           </>
         )}

@@ -11,7 +11,7 @@ export interface KeyFeatureProp {
 
 const KeyFeatures = () => {
   return (
-    <div className="">
+    <div className="mt-[89px]">
       <h3 className="text-center text-40 mb-[114px]">Key Features</h3>
       <div className="flex items-center mb-[87px]">
         {KeyFeaturesData.map((data) => (

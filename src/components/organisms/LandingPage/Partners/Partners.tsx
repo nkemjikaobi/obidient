@@ -9,7 +9,7 @@ export interface PartnerProp {
 
 const Partners = () => {
   return (
-    <div className="grid grid-cols-4 pt-[70px] px-24">
+    <div className="grid grid-cols-4 py-[70px] px-24">
       {PartnersData.map((partner) => (
         <PartnerItem key={partner.id} partner={partner} />
       ))}
