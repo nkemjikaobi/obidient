@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { useRouter } from "next/router";
 import React from "react";
 
 import CustomButton from "@components/atoms/CustomButton/CustomButton";
@@ -10,6 +11,7 @@ import Hero from "@images/png/hero.png";
 // import Hero2 from "@images/png/hero2.png";
 
 const HeroSection = () => {
+  const router = useRouter();
   return (
     <div className="flex justify-between items-center pl-16 bigLaptop:pl-20">
       <div>
@@ -22,7 +24,7 @@ const HeroSection = () => {
         <div className="flex items-center">
           <CustomButton
             customClass="!rounded-[5px] text-white mr-[45px]"
-            handleClick={() => {}}
+            handleClick={() => router.push("/auth/create-account")}
             size={ButtonProperties.SIZES.small}
             title="Get Started"
             variant={ButtonProperties.VARIANT.primary.name}
