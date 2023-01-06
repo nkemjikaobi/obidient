@@ -7,6 +7,7 @@ import Icon from "@components/atoms/Icons";
 import { ButtonProperties } from "@shared/libs/helpers";
 
 import Hero from "@images/png/hero.png";
+// import Hero2 from "@images/png/hero2.png";
 
 const HeroSection = () => {
   return (
@@ -32,7 +33,15 @@ const HeroSection = () => {
           </div>
         </div>
       </div>
-      <Image alt="Ipad showing income" height={233} src={Hero} width={717} />
+      <div className="hidden bigLaptop:block">
+        <Image alt="Ipad showing income" height={233} src={Hero} width={717} />
+      </div>
+      <div className="hidden smallLaptop:block bigLaptop:hidden">
+        <Image alt="Ipad showing income" height={133} src={Hero} width={517} />
+      </div>
+      {/* <div className="block border border-black px-[20px] py-8 rounded-[7px] smallLaptop:hidden">
+        <Image alt="Ipad showing income" height={185} src={Hero2} width={308} />
+      </div> */}
     </div>
   );
 };

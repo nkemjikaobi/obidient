@@ -13,7 +13,7 @@ interface BlogItemProps {
 
 const BlogItem: React.FC<BlogItemProps> = ({ blog }) => {
   return (
-    <div className="w-[377px] h-[552px] border border-obiGray-270 p-8">
+    <div className="w-[377px] h-[552px] border border-obiGray-270 p-8 mb-4">
       <Image alt="blog thumbnail" height={295} src={blog.imgUrl} width={422} />
       <div className="mt-8 flex items-center">
         <h3 className="text-24 mr-6">{blog.title}</h3>

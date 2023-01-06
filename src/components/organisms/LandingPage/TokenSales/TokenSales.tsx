@@ -9,7 +9,7 @@ const TokenSales = () => {
       <h3 className="text-center text-40 mb-[114px]">Token Sales</h3>
       <div className="flex">
         <Image alt="phone" height={750} src="/images/png/phone.png" width={390} />
-        <div className="pl-[200px]">
+        <div className="pl-[100px] bigLaptop:pl-[200px]">
           <p className="uppercase text-obiRed-500 text-14 font-semibold my-12">about</p>
           <p className="text-obiGreen-500 font-semibold text-[40px] capitalize my-4">obidient token</p>
           <p className="font-semibold text-[40px] capitalize mb-4">tokenized party</p>

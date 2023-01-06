@@ -14,7 +14,7 @@ const DesktopNavigation = () => {
       </CustomLink>
       <ul className="flex items-center justify-center">
         {DesktopNav.map((data) => (
-          <li className={`ml-4 mr-[47px] text-16 font-medium`} key={data.id}>
+          <li className={`ml-4 mr-[47px] text-16 font-medium whitespace-nowrap`} key={data.id}>
             <CustomLink customClass="hover:text-obiRed-500" destination={data.route}>
               {data.name}
             </CustomLink>

@@ -17,9 +17,9 @@ export interface GetStartedProp {
 
 const GetStarted = () => {
   return (
-    <div className="mt-[190px]  bg-[#FCFCFF] -ml-[50vw] left-[50%] relative w-screen pt-[112px] px-[146px] pb-[192px]">
-      <h3 className="text-center text-40 mb-[114px]">Get Started</h3>
-      <div className="flex justify-center items-center mb-[87px]">
+    <div className="mt-12 smallLaptop:mt-[190px]  bg-[#FCFCFF] -ml-[50vw] left-[50%] relative w-screen pt-[112px] px-[146px] pb-[192px]">
+      <h3 className="text-center text-40 mb-[114px] whitespace-nowrap">Get Started</h3>
+      <div className="grid grid-cols-1 smallLaptop:grid-cols-2 bigLaptop:flex bigLaptop:justify-center bigLaptop:items-center mb-[87px]">
         {GetStartedData.map((data) => (
           <GetStartedItem item={data} key={data.id} />
         ))}

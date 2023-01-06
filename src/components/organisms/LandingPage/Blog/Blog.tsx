@@ -14,7 +14,7 @@ const Blog = () => {
   return (
     <div className="pt-[100px] pb-[60px] px-24">
       <h3 className="text-center text-40 mb-[114px]">Our Blog</h3>
-      <div className="grid grid-cols-3">
+      <div className="grid grid-cols-1 smallLaptop:grid-cols-2 bigLaptop:grid-cols-3">
         {BlogData.map((blog) => (
           <BlogItem blog={blog} key={blog.id} />
         ))}
