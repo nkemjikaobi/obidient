@@ -66,6 +66,9 @@ module.exports = {
           200: "#1355FF",
           300: "#3B7CBF",
         },
+        obiPurple: {
+          400: "#424AF5",
+        },
         gradient: {
           keyFeature: "rgba(0, 0, 0, 0.23) 0.07%, #000000 87.45%)",
         },
