@@ -60,3 +60,15 @@ export const CURRENCIES = {
 export const TransactionStatus = {
   SUCCESSFUL: "successful",
 };
+
+/**
+ * Method to subtract years from a particular date
+ * @param {number} numOfYears
+ * @param {date} date
+ * @return {date}
+ */
+export const subtractYears = (numOfYears: number, date = new Date()) => {
+  date.setFullYear(date.getFullYear() - numOfYears);
+
+  return date;
+};

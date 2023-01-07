@@ -22,7 +22,7 @@ const FormikCustomInput = ({ className, container, type, iconClass, iconPosition
         className={classNames(
           "flex items-center h-[3.571rem] w-full",
           className,
-          meta.touched && meta.error ? "!border-red-500" : meta.touched && !meta.error ? "!border-green-700" : ""
+          meta.touched && meta.error ? "!border-red-500" : meta.touched && !meta.error ? "!border-green-700" : "border-[#B2BCCA]"
         )}
       >
         <div className={classNames("flex px-5 bg-white text-black items-center justify-start h-full w-full rounded-[0.313rem]", container)}>
