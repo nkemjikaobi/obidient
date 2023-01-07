@@ -51,3 +51,8 @@ export const errorMessages = {
   required: "This field is compulsory",
   passwordMatch: "Passwords dont match",
 };
+
+// CURRENCIES
+export const CURRENCIES = {
+  NAIRA: "₦",
+};
