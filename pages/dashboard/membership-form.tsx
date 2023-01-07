@@ -6,7 +6,7 @@ import MembershipForm from "@components/organisms/MembershipPage/MembershipForm/
 import MembershipForm2 from "@components/organisms/MembershipPage/MembershipForm2/MembershipForm2";
 
 const MembershipFormPage: NextPage = () => {
-  const [isFirstStepDone] = useState<boolean>(true);
+  const [isFirstStepDone] = useState<boolean>(false);
   return (
     <div>
       <Head>

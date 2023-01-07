@@ -82,7 +82,7 @@ const MembershipForm = () => {
 
   return (
     <div className="px-8 bigLaptop:px-[100px] television:px-[164px] pt-8">
-      <div className="flex items-center justify-between">
+      <div className="hidden smallLaptop:flex items-center justify-between">
         <div className="flex items-center cursor-pointer">
           <Icon name="caretLeft" />
           <p className="font-semibold ml-2 whitespace-nowrap">Go Back</p>
@@ -92,14 +92,14 @@ const MembershipForm = () => {
           Have an account? <span className="text-obiBlue-200 ml-2">Sign In</span>
         </span>
       </div>
-      <p className="text-14 text-[#828282] pt-[52px]">Kindly fill in your details to continue</p>
+      <p className="hidden smallLaptop:blocktext-14 text-[#828282] pt-[52px]">Kindly fill in your details to continue</p>
       <div>
         <Formik enableReinitialize initialValues={initialState} onSubmit={registerMember} validationSchema={RegisterSchema}>
           {(props: FormikProps<Values>) => (
-            <Form className="flex">
+            <Form className="flex flex-col smallLaptop:flex-row">
               <div>
                 <div className="relative">
-                  <h3 className="font-semibold text-18 mt-12">1. Contact Information</h3>
+                  <h3 className="font-semibold text-18 mt-12 mb-2">1. Contact Information</h3>
                   <FormikCustomInput
                     className="border border-glass-450 rounded-[0.313rem] h-[3.75rem] mr-4 mt-2 "
                     container="tablet:px-6"
@@ -155,7 +155,7 @@ const MembershipForm = () => {
                       />
                     </div>
                   </div>
-                  <div className="flex items-center space-x-4">
+                  <div className="flex flex-col smallLaptop:flex-row smallLaptop:items-center smallLaptop:space-x-4">
                     <div>
                       <CustomLabel className="mb-[0.438rem] text-14 text-obiGray-320" title="Age" />
                       <DatePicker
@@ -185,7 +185,7 @@ const MembershipForm = () => {
                     <div>
                       <FormikCustomSelect className="h-16 rounded-md border w-[200px] !text-obiGray-320" name="sex" options={genderOptions} parentContainer="!border-obiGray-320" />
                     </div>
-                    <div>
+                    <div className="mt-4 smallLaptop:mt-0">
                       <CustomLabel className="mb-[0.438rem] text-14 text-obiGray-320" title="Post Code" />
                       <FormikCustomInput
                         className="border border-glass-450 rounded-[0.313rem] h-[3.75rem] mr-4 mt-2 "
@@ -274,7 +274,7 @@ const MembershipForm = () => {
                 </div>
               </div>
 
-              <div className="relative ml-12">
+              <div className="relative smallLaptop:ml-12">
                 <h3 className="font-semibold text-18 mt-12">3. KYC</h3>
                 <p className="text-14 text-obiGray-320 my-4">Select preferred option and upload document</p>
                 <div>
@@ -303,7 +303,7 @@ const MembershipForm = () => {
                   </div>
                 </div>
                 <CustomButton
-                  customClass="mt-12 !w-[80%]"
+                  customClass="mt-12 !w-full smallLaptop:!w-[80%] mb-8 smallLaptop:mb-0"
                   handleClick={() => {}}
                   size={ButtonProperties.SIZES.big}
                   title="Save & Continue"

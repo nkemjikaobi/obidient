@@ -48,7 +48,7 @@ const MembershipForm2 = () => {
 
   return (
     <div className="px-8 bigLaptop:px-[100px] television:px-[164px] pt-8">
-      <div className="flex items-center justify-between">
+      <div className="hidden smallLaptop:flex items-center justify-between">
         <div className="flex items-center cursor-pointer">
           <Icon name="caretLeft" />
           <p className="font-semibold ml-2 whitespace-nowrap">Go Back</p>
@@ -58,7 +58,7 @@ const MembershipForm2 = () => {
           Have an account? <span className="text-obiBlue-200 ml-2">Sign In</span>
         </span>
       </div>
-      <p className="text-14 text-[#828282] pt-[52px]">Kindly fill in your details to continue</p>
+      <p className="hidden smallLaptop:block text-14 text-[#828282] pt-[52px]">Kindly fill in your details to continue</p>
       <div>
         <div>
           <div className="relative">
@@ -77,7 +77,7 @@ const MembershipForm2 = () => {
             </p>
             <div className="flex items-center">
               <Image alt="" height={98} src="/images/png/confirmDp.png" width={78} />
-              <div className="ml-8">
+              <div className="ml-8 text-14 smallLaptop:text-16">
                 <p>Name: Alhaji Akassan Muyidden</p>
                 <p>Ward: Gwagalada</p>
                 <p>LGA: Ikeja</p>
@@ -86,16 +86,16 @@ const MembershipForm2 = () => {
             </div>
             <div className="flex items-center justify-between my-4 w-[30%]">
               <p>SubTotal</p>
-              <p>{CURRENCIES.NAIRA} 1,000</p>
+              <p className="whitespace-nowrap ml-8 smallLaptop:ml-0">{CURRENCIES.NAIRA} 1,000</p>
             </div>
             <div className="flex items-center justify-between my-4 w-[30%]">
               <p>Discount</p>
-              <p>{CURRENCIES.NAIRA} 0.00</p>
+              <p className="whitespace-nowrap ml-8 smallLaptop:ml-0">{CURRENCIES.NAIRA} 0.00</p>
             </div>
             <hr className="w-[30%] mb-4" />
             <div className="flex items-center justify-between my-4 w-[30%]">
               <p>Total</p>
-              <p>{CURRENCIES.NAIRA} 1,000.00</p>
+              <p className="whitespace-nowrap ml-8 smallLaptop:ml-0">{CURRENCIES.NAIRA} 1,000.00</p>
             </div>
             <hr className="w-[30%] mb-4" />
             <Formik enableReinitialize initialValues={initialState} onSubmit={registerMember} validationSchema={RegisterSchema}>
@@ -103,9 +103,9 @@ const MembershipForm2 = () => {
                 <Form className="">
                   <div className="relative w-[30%]">
                     <div>
-                      <CustomLabel className="mb-[0.438rem] text-14 text-obiGray-320" title="Comment (optional)" />
+                      <CustomLabel className="mb-[0.438rem] text-14 text-obiGray-320 whitespace-nowrap" title="Comment (optional)" />
                       <FormikCustomInput
-                        className="border border-glass-450 rounded-[0.313rem] h-[3.75rem] mr-4 mt-2 "
+                        className="border border-glass-450 rounded-[0.313rem] h-[3.75rem] mr-4 mt-2 !w-[350px] smallLaptop:!w-full"
                         container="tablet:px-6"
                         inputClassName="placeholder:text-sm border-black"
                         name="comment"
@@ -116,13 +116,13 @@ const MembershipForm2 = () => {
                     <FormikCustomCheckbox
                       className="!border-gray-400 w-5 h-5  rounded-lg"
                       label="Please check to acknowledge Privacy/terms policy"
-                      labelClassName="text-14 font-normal whitespace-nowrap"
+                      labelClassName="text-12 smallLaptop:text-14 font-normal whitespace-nowrap"
                       labelPosition="end"
                       name="terms"
                       type="checkbox"
                     />
                     <CustomButton
-                      customClass="mt-12 !w-[80%]"
+                      customClass="mt-12 !w-full smallLaptop:!w-[80%] mb-8 smallLaptop:mb-0"
                       handleClick={() => {}}
                       size={ButtonProperties.SIZES.big}
                       title={`Pay ${CURRENCIES.NAIRA} 1,000`}
