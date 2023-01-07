@@ -12,8 +12,8 @@ export interface KeyFeatureProp {
 const KeyFeatures = () => {
   return (
     <div className="mt-[89px]">
-      <h3 className="text-center text-40 mb-[114px]">Key Features</h3>
-      <div className="grid grid-cols-2 bigLaptop:flex bigLaptop:items-center mb-[87px] px-16">
+      <h3 className="text-center text-[32px] smallLaptop:text-40 mb-6 smallLaptop:mb-[114px]">Key Features</h3>
+      <div className="grid grid-cols-1 tablet:grid-cols-2 bigLaptop:flex bigLaptop:items-center mb-[87px] pl-8 pr-4 smallLaptop:px-16">
         {KeyFeaturesData.map((data) => (
           <KeyFeatureItem item={data} key={data.id} />
         ))}

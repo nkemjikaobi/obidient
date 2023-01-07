@@ -5,15 +5,15 @@ import CustomLink from "@components/atoms/CustomLink/CustomLink";
 
 const TokenSales = () => {
   return (
-    <div className="pt-[100px] pb-[60px] px-24">
-      <h3 className="text-center text-40 mb-[114px]">Token Sales</h3>
-      <div className="flex">
+    <div className="pt-[100px] pb-[60px] px-6 smallLaptop:px-24">
+      <h3 className="text-center text-40 mb-6 smallLaptop:mb-[114px] whitespace-nowrap">Token Sales</h3>
+      <div className="flex flex-col smallLaptop:flex-row">
         <Image alt="phone" height={750} src="/images/png/phone.png" width={390} />
-        <div className="pl-[100px] bigLaptop:pl-[200px]">
+        <div className="smallLaptop:pl-[100px] bigLaptop:pl-[200px]">
           <p className="uppercase text-obiRed-500 text-14 font-semibold my-12">about</p>
-          <p className="text-obiGreen-500 font-semibold text-[40px] capitalize my-4">obidient token</p>
-          <p className="font-semibold text-[40px] capitalize mb-4">tokenized party</p>
-          <p className="font-semibold text-[40px] capitalize mb-4">membership.</p>
+          <p className="text-obiGreen-500 font-semibold text-[30px] smallLaptop:text-[40px] capitalize my-4">obidient token</p>
+          <p className="font-semibold text-[30px] smallLaptop:text-[40px] capitalize mb-4">tokenized party</p>
+          <p className="font-semibold text-[30px] smallLaptop:text-[40px] capitalize mb-4">membership.</p>
           <p className="mt-2 text-obiBlack-200 text-14 w-[80%] mb-4 leading-5">
             The purpose of the project is to create and tokenize Party membership with a major focus on fundraising and providing evidential benefits.
           </p>

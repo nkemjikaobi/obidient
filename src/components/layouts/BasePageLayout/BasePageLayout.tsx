@@ -3,6 +3,7 @@ import React from "react";
 
 // import MobileFooter from "../Footer/MobileFooter";
 import DesktopFooter from "../Footer/DesktopFooter/DesktopFooter";
+import MobileFooter from "../Footer/MobileFooter/MobileFooter";
 import DesktopNavigation from "../NavBar/DesktopNavigation";
 import MobileNavigation from "../NavBar/MobileNavigation";
 // import MobileNavigation from "../NavBar/MobileNavigation";
@@ -47,7 +48,9 @@ const BasePageLayout = ({ children, showNavigation, showDesktopNavigation, showM
             <div className="hidden smallLaptop:block smallLaptop:w-full">
               <DesktopFooter />
             </div>
-            <div className="block w-full smallLaptop:hidden">{/* <MobileFooter /> */}</div>
+            <div className="block w-full smallLaptop:hidden">
+              <MobileFooter />
+            </div>
           </>
         )}
       </section>

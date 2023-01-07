@@ -13,12 +13,12 @@ import Hero from "@images/png/hero.png";
 const HeroSection = () => {
   const router = useRouter();
   return (
-    <div className="flex justify-between items-center pl-16 bigLaptop:pl-20">
-      <div>
-        <p className="font-semibold mb-1 text-[35px] text-obiGreen-500">Obidient Token</p>
-        <p className="font-semibold mb-1 text-[35px] text-black">Tokenized Party</p>
-        <p className="font-semibold text-[35px] text-black">Membership</p>
-        <p className="mt-[30px] text-14 mb-8 text-obiGray-400 w-[487px] leading-[27px]">
+    <div className="flex justify-between items-center pl-4 smallLaptop:pl-16 bigLaptop:pl-20">
+      <div className="mt-6 smallLaptop:ml-0">
+        <p className="font-semibold mb-1 text-[30px] smallLaptop:text-[35px] text-obiGreen-500">Obidient Token</p>
+        <p className="font-semibold mb-1 text-[30px] smallLaptop:text-[35px] text-black">Tokenized Party</p>
+        <p className="font-semibold text-[30px] smallLaptop:text-[35px] text-black">Membership</p>
+        <p className="mt-[30px] text-14 mb-8 text-obiGray-400 smallLaptop:w-[487px] leading-[27px]">
           The purpose of the project is to create and tokenize Party membership with a major focus on fundraising and providing evidential benefits.
         </p>
         <div className="flex items-center">
