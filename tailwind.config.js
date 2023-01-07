@@ -49,17 +49,22 @@ module.exports = {
           270: "#E7EAEE",
           300: "#605B5B",
           320: "#6C6969",
+          330: "#E9E7E7",
           350: "#586174",
           400: "#353535",
         },
         obiGreen: {
+          100: "#68B06E",
+          400: "#34AA44",
           500: "#12791B",
         },
         obiBlack: {
           200: "#353535",
+          300: "#05062C",
         },
         obiBlue: {
           200: "#1355FF",
+          300: "#3B7CBF",
         },
         gradient: {
           keyFeature: "rgba(0, 0, 0, 0.23) 0.07%, #000000 87.45%)",
@@ -71,6 +76,9 @@ module.exports = {
       width: {
         600: "600px",
         500: "500px",
+      },
+      backgroundImage: {
+        profilePic: "url('/images/png/profile.png')",
       },
     },
   },

@@ -18,7 +18,7 @@ const DesktopFooter = () => {
             <div className="flex items-center mt-8">
               {Socials.map((socials) => (
                 <div className="mr-4 cursor-pointer" key={socials.id}>
-                  <a className=" hover:text-crypGreen-500" href={socials.route} rel="noreferrer">
+                  <a className=" hover:text-obiRed-500" href={socials.route} rel="noreferrer">
                     <socials.icon />
                   </a>
                 </div>
