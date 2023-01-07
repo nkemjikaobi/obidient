@@ -72,3 +72,29 @@ export const subtractYears = (numOfYears: number, date = new Date()) => {
 
   return date;
 };
+
+export const RadioButtonProperties = {
+  LABEL_POSITION: {
+    start: "start",
+    end: "end",
+  },
+  SIZES: {
+    small: "small",
+    big: "big",
+  },
+};
+
+export const CheckBoxProperties = {
+  LABEL_POSITION: {
+    start: "start",
+    end: "end",
+  },
+  SHAPE: {
+    square: "square",
+    rounded: "rounded",
+  },
+  SIZES: {
+    small: "small",
+    big: "big",
+  },
+};
