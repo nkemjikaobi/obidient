@@ -56,3 +56,7 @@ export const errorMessages = {
 export const CURRENCIES = {
   NAIRA: "₦",
 };
+
+export const TransactionStatus = {
+  SUCCESSFUL: "successful",
+};
