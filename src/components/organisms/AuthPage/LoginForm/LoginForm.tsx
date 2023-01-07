@@ -41,11 +41,13 @@ const LoginForm = () => {
   const loginUser = () => {};
 
   return (
-    <div className="flex">
-      <div className="w-[40%] pt-[95px] pl-[59px] pr-[97px]">
-        <Logo />
+    <div className="smallLaptop:flex">
+      <div className="pt-24 px-8 smallLaptop:w-[40%] smallLaptop:pt-[95px] smallLaptop:pl-[59px] smallLaptop:pr-[97px]">
+        <div className="hidden smallLaptop:block">
+          <Logo />
+        </div>
         <div>
-          <h2 className="pt-[172px] bigLaptop:pt-[230px] font-semibold text-[35px] pb-[23px]">Login</h2>
+          <h2 className=" bigLaptop:pt-[230px] font-semibold text-[35px] pb-[23px]">Login</h2>
           <Formik enableReinitialize initialValues={initialState} onSubmit={loginUser} validationSchema={LoginSchema}>
             {(props: FormikProps<Values>) => (
               <Form>
@@ -81,7 +83,7 @@ const LoginForm = () => {
                   {/* <p className="font-medium">or register with</p> */}
                 </div>
                 <p className="text-center text-16 hover:text-obiBlack-200 cursor-pointer pt-[35px] pb-[49px] whitespace-nowrap">Forgot Password?</p>
-                <p className="text-16 text-center mb-8 mt-24 whitespace-nowrap">
+                <p className="text-16 text-center mb-8 smallLaptop:mt-24 whitespace-nowrap">
                   Dont have an account?{" "}
                   <span className="text-obiRed-500 hover:text-red-800 cursor-pointer" onClick={() => router.push("/auth/create-account")}>
                     Register

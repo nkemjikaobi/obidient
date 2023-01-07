@@ -14,7 +14,7 @@ const WalletBalance = () => {
       <RenderBalance balanceToRender={balanceToRender} />
       <div className="flex items-center space-x-4 justify-center mt-8">
         {range(3).map((ind) =>
-          balanceToRender <= ind ? (
+          balanceToRender !== ind + 1 ? (
             <Icon className="cursor-pointer" key={uuidv4()} name="circleEmpty" onClick={() => setBalanceToRender(ind + 1)} />
           ) : (
             <Icon className="cursor-pointer" key={uuidv4()} name="circleFilled" onClick={() => setBalanceToRender(ind + 1)} />

@@ -55,11 +55,13 @@ const RegisterForm = () => {
   const registerUser = () => {};
 
   return (
-    <div className="flex">
-      <div className="w-[40%] pt-[95px] pl-[59px] pr-[97px]">
-        <Logo />
+    <div className="smallLaptop:flex">
+      <div className="pt-24 px-8 smallLaptop:w-[40%] smallLaptop:pt-[95px] smallLaptop:pl-[59px] smallLaptop:pr-[97px]">
+        <div className="hidden smallLaptop:block">
+          <Logo />
+        </div>
         <div>
-          <h2 className="pt-[172px] bigLaptop:pt-[100px] font-semibold text-[35px] pb-[23px]">Create Account</h2>
+          <h2 className="smallLaptop:pt-[172px] bigLaptop:pt-[100px] font-semibold text-[35px] pb-[23px]">Create Account</h2>
           <Formik enableReinitialize initialValues={initialState} onSubmit={registerUser} validationSchema={RegisterSchema}>
             {(props: FormikProps<Values>) => (
               <Form>

@@ -7,7 +7,7 @@ import { RegisterPage } from "@modules/authPages";
 
 const CreateAccount: NextPage = () => {
   return (
-    <BasePageLayout showFooter={false} showNavigation={false} title="Obidient Create Account">
+    <BasePageLayout showDesktopNavigation={false} showFooter={false} showMobileNavigation={true} showNavigation={true} title="Obidient Create Account">
       <RegisterPage />
     </BasePageLayout>
   );

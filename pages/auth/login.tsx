@@ -7,7 +7,7 @@ import { LoginPage } from "@modules/authPages";
 
 const Login: NextPage = () => {
   return (
-    <BasePageLayout showFooter={false} showNavigation={false} title="Obidient Login">
+    <BasePageLayout showDesktopNavigation={false} showFooter={false} showMobileNavigation={true} showNavigation={true} title="Obidient Login">
       <LoginPage />
     </BasePageLayout>
   );

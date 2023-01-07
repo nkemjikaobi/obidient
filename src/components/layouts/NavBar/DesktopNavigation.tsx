@@ -49,7 +49,7 @@ const DesktopNavigation = () => {
 
 export default DesktopNavigation;
 
-const DesktopNav = [
+export const DesktopNav = [
   {
     id: 1,
     name: "How it Works",
