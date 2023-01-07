@@ -17,7 +17,7 @@ const TopBar = () => {
           type="text"
         />
         <Icon className="mr-[30px]" name="bell" />
-        <div className="w-[59.75px] h-[43.75px] rounded-full bg-profilePic bg-cover bg-center bg-no-repeat cursor-pointer" />
+        <div className="w-[59.75px] h-[43.75px] rounded-full bg-profilePic bg-cover bg-center bg-no-repeat cursor-pointer mr-6" />
       </div>
     </div>
   );

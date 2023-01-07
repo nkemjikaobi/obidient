@@ -18,7 +18,7 @@ export const DashBoard: FC = () => (
         </div>
         <RecentActivities />
       </div>
-      <div className="bg-white h-[1434px] ml-8 w-[531px] overflow-y-scroll">
+      <div className="bg-white h-[1434px] ml-8 television:w-[531px] overflow-y-scroll">
         <WalletBalance />
         <WalletTransactions />
       </div>

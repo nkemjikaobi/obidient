@@ -12,7 +12,7 @@ const WalletBalance = () => {
     <div className="pt-[35px] px-[46px]">
       <h4 className="text-18 mt-[35px] mb-[15px]">Your Wallet ID : 2567WWG68 </h4>
       <RenderBalance balanceToRender={balanceToRender} />
-      <div className="flex items-center space-x-4 justify-center mt-4">
+      <div className="flex items-center space-x-4 justify-center mt-8">
         {range(3).map((ind) =>
           balanceToRender <= ind ? (
             <Icon className="cursor-pointer" key={uuidv4()} name="circleEmpty" onClick={() => setBalanceToRender(ind + 1)} />

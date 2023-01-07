@@ -6,9 +6,9 @@ import { ButtonProperties, CURRENCIES } from "@shared/libs/helpers";
 
 const MembershipPlan = () => {
   return (
-    <div className="bg-white px-[34px] pt-[44px] rounded-[20px] w-[480px] h-[513.88px] bigLaptop:pb-8">
+    <div className="bg-white px-[34px] pt-[44px] rounded-[20px] w-[380px] television:w-[480px] h-[513.88px] bigLaptop:pb-8">
       <h4 className="text-18 mb-6">Membership Plan</h4>
-      <div className="border border-obiBlue-300 px-[28px] pt-[29px] w-[411px]">
+      <div className="border border-obiBlue-300 px-[28px] pt-[29px] w-[311px] television:w-[411px]">
         <div className="flex items-center justify-between">
           <p className="text-14 text-obiGray-320">Monthly</p>
           <div className="flex justify-center items-center text-obiGreen-400 rounded-[5px] bg-green-100 text-10 w-[67px] h-[31px] font-semibold">Active</div>
