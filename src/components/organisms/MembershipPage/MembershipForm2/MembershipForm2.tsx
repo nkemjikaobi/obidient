@@ -47,13 +47,13 @@ const MembershipForm2 = () => {
   const registerMember = () => {};
 
   return (
-    <div className="px-[164px] pt-8">
+    <div className="px-8 bigLaptop:px-[100px] television:px-[164px] pt-8">
       <div className="flex items-center justify-between">
         <div className="flex items-center cursor-pointer">
           <Icon name="caretLeft" />
-          <p className="font-semibold ml-2">Go Back</p>
+          <p className="font-semibold ml-2 whitespace-nowrap">Go Back</p>
         </div>
-        <h3 className="text-[40px] font-semibold">Membership Registration Form</h3>
+        <h3 className="text-[27px] bigLaptop:text-[40px] font-semibold">Membership Registration Form</h3>
         <span className="text-14">
           Have an account? <span className="text-obiBlue-200 ml-2">Sign In</span>
         </span>
