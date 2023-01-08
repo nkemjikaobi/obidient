@@ -6,8 +6,8 @@ import Icon from "@components/atoms/Icons";
 const TopBar = () => {
   return (
     <div className="flex items-center justify-between pt-[47px] pr-[117px]">
-      <h3 className="font-medium text-20">Welcome Back, James !</h3>
-      <div className="flex items-center">
+      <h3 className="font-medium text-16 smallLaptop:text-20 whitespace-nowrap">Welcome Back, James !</h3>
+      <div className="hidden smallLaptop:flex items-center">
         <CustomInput
           className="border border-glass-450 rounded-[0.313rem] mr-[35px] mt-2 h-[56px]"
           icon="search"

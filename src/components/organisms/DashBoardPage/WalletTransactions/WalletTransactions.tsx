@@ -11,8 +11,8 @@ export interface TransactionProp {
 
 const WalletTransactions = () => {
   return (
-    <div className="px-[46px]">
-      <h4 className="text-18 mt-[35px] mb-[15px]">Transactions</h4>
+    <div className="px-6 mt-4 smallLaptop:mt-0 smallLaptop:px-[46px]">
+      <h4 className="text-16 smallLaptop:text-18 mt-[35px] mb-[15px]">Transactions</h4>
       <div>
         {data.map((transaction: TransactionProp) => (
           <TransactionItem key={transaction.id} transaction={transaction} />

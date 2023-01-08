@@ -2,6 +2,7 @@ import Head from "next/head";
 import React from "react";
 
 import DashboardSideBar from "../DashboardSideBar/DashboardSideBar";
+import DashboardMobileNavigation from "../NavBar/DashBoardMobileNavigation";
 
 interface DashboardLayout {
   children: any;
@@ -27,9 +28,9 @@ const DashboardLayout = ({ children, title, description, keywords, showFooter }:
               <div className="hidden smallLaptop:block">
                 <DashboardSideBar />
               </div>
-              {/* <div className="block smallLaptop:hidden">
+              <div className="block smallLaptop:hidden">
                 <DashboardMobileNavigation />
-              </div> */}
+              </div>
               <div className="w-full">
                 <main className="h-full">{children}</main>
               </div>

@@ -8,17 +8,21 @@ import WalletBalance from "@components/organisms/DashBoardPage/WalletBalance/Wal
 import WalletTransactions from "@components/organisms/DashBoardPage/WalletTransactions/WalletTransactions";
 
 export const DashBoard: FC = () => (
-  <div className="pl-[48px]">
+  <div className="pl-4 bigLaptop:pl-[48px]">
     <TopBar />
-    <div className="flex mt-12">
+    <div className="flex flex-col bigLaptop:flex-row mt-12">
       <div className="">
-        <div className="flex items-center space-x-12 mb-8">
+        <div className="flex flex-col bigLaptop:flex-row items-center bigLaptop:space-x-12 mb-8">
           <MembershipPlan />
-          <MembershipCard />
+          <div className="hidden bigLaptop:block">
+            <MembershipCard />
+          </div>
         </div>
-        <RecentActivities />
+        <div className="hidden bigLaptop:block">
+          <RecentActivities />
+        </div>
       </div>
-      <div className="bg-white h-[1434px] ml-8 television:w-[531px] overflow-y-scroll">
+      <div className="bg-white h-[1434px] bigLaptop:ml-8 television:w-[531px] overflow-y-scroll">
         <WalletBalance />
         <WalletTransactions />
       </div>

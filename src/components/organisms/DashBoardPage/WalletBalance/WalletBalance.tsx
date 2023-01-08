@@ -9,8 +9,8 @@ import RenderBalance from "../RenderBalance/RenderBalance";
 const WalletBalance = () => {
   const [balanceToRender, setBalanceToRender] = useState<number>(1);
   return (
-    <div className="pt-[35px] px-[46px]">
-      <h4 className="text-18 mt-[35px] mb-[15px]">Your Wallet ID : 2567WWG68 </h4>
+    <div className="pt-6 smallLaptop:pt-[35px] px-6 smallLaptop:px-[46px]">
+      <h4 className="text-16 smallLaptop:text-18 mt-[35px] mb-[15px]">Your Wallet ID : 2567WWG68 </h4>
       <RenderBalance balanceToRender={balanceToRender} />
       <div className="flex items-center space-x-4 justify-center mt-8">
         {range(3).map((ind) =>
@@ -25,7 +25,7 @@ const WalletBalance = () => {
         {walletActionsData.map((data) => (
           <div key={data.id}>
             <Icon name={data.name} />
-            <p className="capitalize mt-4 text-14 text-center">{data.name}</p>
+            <p className="capitalize mt-4 text-12 smallLaptop:text-14 text-center">{data.name}</p>
           </div>
         ))}
       </div>
