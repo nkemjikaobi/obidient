@@ -1,4 +1,16 @@
-import { REGISTER_SUCCESS, REGISTER_FAIL, USER_LOADED, AUTH_ERROR, LOGIN_SUCCESS, LOGIN_FAIL, CLEAR_ERRORS, LOGOUT, SET_LOADING } from "../types";
+import {
+  REGISTER_SUCCESS,
+  REGISTER_FAIL,
+  USER_LOADED,
+  AUTH_ERROR,
+  LOGIN_SUCCESS,
+  LOGIN_FAIL,
+  CLEAR_ERRORS,
+  LOGOUT,
+  SET_LOADING,
+  MEMBERSHIP_REGISTRATION_SUCCESS,
+  MEMBERSHIP_REGISTRATION_FAIL,
+} from "../types";
 
 const AuthReducer = (state: any, action: any) => {
   switch (action.type) {
@@ -37,6 +49,19 @@ const AuthReducer = (state: any, action: any) => {
         user: null,
         error: action.payload,
       };
+    case MEMBERSHIP_REGISTRATION_SUCCESS:
+      return {
+        ...state,
+        ...action.payload,
+        loading: false,
+        message: "Registration Success. You will be redirected shortly",
+      };
+    case MEMBERSHIP_REGISTRATION_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
     case LOGIN_SUCCESS:
       localStorage.setItem("token", action.payload.token);
       return {
@@ -44,6 +69,7 @@ const AuthReducer = (state: any, action: any) => {
         ...action.payload,
         isAuthenticated: true,
         loading: false,
+        token: action.payload.token,
       };
     case LOGIN_FAIL:
       localStorage.removeItem("token");

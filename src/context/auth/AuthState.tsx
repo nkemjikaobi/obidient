@@ -7,7 +7,20 @@ import { RegisterFormDataProps } from "@components/organisms/AuthPage/RegisterFo
 
 import { setAuthToken } from "@shared/libs/helpers";
 
-import { REGISTER_SUCCESS, REGISTER_FAIL, USER_LOADED, AUTH_ERROR, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT, CLEAR_ERRORS, SET_LOADING, CLEAR_MESSAGES } from "../types";
+import {
+  REGISTER_SUCCESS,
+  REGISTER_FAIL,
+  USER_LOADED,
+  AUTH_ERROR,
+  LOGIN_SUCCESS,
+  LOGIN_FAIL,
+  LOGOUT,
+  CLEAR_ERRORS,
+  SET_LOADING,
+  CLEAR_MESSAGES,
+  MEMBERSHIP_REGISTRATION_SUCCESS,
+  MEMBERSHIP_REGISTRATION_FAIL,
+} from "../types";
 import AuthContext from "./AuthContext";
 import AuthReducer from "./AuthReducer";
 
@@ -40,7 +53,7 @@ const AuthState = (props: any) => {
       const res = await customAxios.get("/user/me");
       dispatch({
         type: USER_LOADED,
-        payload: res.data,
+        payload: res.data.data,
       });
     } catch (err: any) {
       dispatch({
@@ -95,8 +108,10 @@ const AuthState = (props: any) => {
 
       loadUser();
 
-      if (!res.data.data.hasSubscribed) {
+      if (!res.data.data.user.membershipRegistration) {
         router.push("/auth/membership-form");
+      } else if (!res.data.data.user.hasSubscribed) {
+        router.push("/auth/membership-form-payment");
       } else {
         router.push("/dashboard");
       }
@@ -124,6 +139,36 @@ const AuthState = (props: any) => {
     });
   };
 
+  // Membership Registration
+  const membershipRegistration = async (user: any, router: NextRouter) => {
+    setLoading(true);
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    try {
+      setLoading(true);
+      const res = await customAxios.put(`/user/membership-registration`, user, config);
+      dispatch({
+        type: MEMBERSHIP_REGISTRATION_SUCCESS,
+        payload: res.data.data,
+      });
+
+      loadUser();
+
+      setTimeout(() => {
+        router.push("/auth/membership-form-payment");
+      }, 1500);
+    } catch (err: any) {
+      dispatch({
+        type: MEMBERSHIP_REGISTRATION_FAIL,
+        payload: err.response.data.message,
+      });
+    }
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -140,6 +185,7 @@ const AuthState = (props: any) => {
         logout,
         setLoading,
         clearMessages,
+        membershipRegistration,
       }}
     >
       {props.children}

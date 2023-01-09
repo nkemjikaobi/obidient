@@ -1,4 +1,5 @@
 import axios from "axios";
+import moment from "moment";
 
 /**
  * Button properties for the custom button
@@ -108,8 +109,44 @@ export const NotificationTypes = {
 
 export const setAuthToken = (token: string) => {
   if (token) {
-    axios.defaults.headers.common["x-auth-token"] = token;
+    axios.defaults.headers.common["authorization"] = `Bearer ${token}`;
   } else {
-    delete axios.defaults.headers.common["x-auth-token"];
+    delete axios.defaults.headers.common["authorization"];
   }
 };
+
+/**
+ * Change date format
+ * @param {Date} date
+ * @param {String} timeFormat
+ * @return {Date}
+ */
+export const changeDateFormat = (date: Date | undefined, timeFormat: string) => {
+  if (date) {
+    return moment(date).format(timeFormat);
+  }
+};
+
+export interface CloudinaryImageProps {
+  asset_id: string;
+  public_id: string;
+  version: number;
+  version_id: string;
+  signature: string;
+  width: number;
+  height: number;
+  format: string;
+  resource_type: string;
+  created_at: string;
+  tags: [];
+  bytes: number;
+  type: string;
+  etag: string;
+  placeholder: boolean;
+  url: string;
+  secure_url: string;
+  folder: string;
+  access_mode: string;
+  existing: boolean;
+  original_filename: string;
+}

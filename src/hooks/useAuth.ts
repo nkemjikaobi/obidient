@@ -12,6 +12,7 @@ const useAuth = () => {
     logout,
     setLoading,
     clearMessages,
+    membershipRegistration,
 
     // state variables
     token,
@@ -30,6 +31,7 @@ const useAuth = () => {
     logout,
     setLoading,
     clearMessages,
+    membershipRegistration,
 
     // state variables
     token,
