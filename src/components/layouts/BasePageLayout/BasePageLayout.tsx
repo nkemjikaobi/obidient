@@ -1,11 +1,16 @@
 import Head from "next/head";
-import React from "react";
+import React, { useEffect } from "react";
+import showToast from "src/helpers/showToast";
 
-// import MobileFooter from "../Footer/MobileFooter";
+import useAuth from "@hooks/useAuth";
+
+import { NotificationTypes } from "@shared/libs/helpers";
+
 import DesktopFooter from "../Footer/DesktopFooter/DesktopFooter";
 import MobileFooter from "../Footer/MobileFooter/MobileFooter";
 import DesktopNavigation from "../NavBar/DesktopNavigation";
 import MobileNavigation from "../NavBar/MobileNavigation";
+
 // import MobileNavigation from "../NavBar/MobileNavigation";
 
 interface BasePageLayout {
@@ -20,6 +25,22 @@ interface BasePageLayout {
 }
 
 const BasePageLayout = ({ children, showNavigation, showDesktopNavigation, showMobileNavigation, showFooter, title, description, keywords }: BasePageLayout) => {
+  const { error, clearErrors, message, clearMessages } = useAuth();
+
+  useEffect(() => {
+    if (error) {
+      showToast(error, NotificationTypes.ERROR);
+      clearErrors();
+    }
+  }, [error]);
+
+  useEffect(() => {
+    if (message) {
+      showToast(message, NotificationTypes.SUCCESS);
+      clearMessages();
+    }
+  });
+
   return (
     <div>
       <Head>

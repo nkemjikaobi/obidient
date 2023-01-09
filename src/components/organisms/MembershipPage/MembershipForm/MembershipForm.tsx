@@ -1,4 +1,5 @@
 import { Form, Formik, FormikProps } from "formik";
+import { useRouter } from "next/router";
 import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import { useDropzone } from "react-dropzone";
@@ -18,6 +19,7 @@ import "react-datepicker/dist/react-datepicker.css";
 const MembershipForm = () => {
   const { getRootProps, getInputProps } = useDropzone();
   const [departureDate, setDepartureDate] = useState<Date | null>(null);
+  const router = useRouter();
 
   const initialState = {
     email: "",
@@ -27,13 +29,19 @@ const MembershipForm = () => {
     sex: "",
     postCode: "",
     occupation: "",
-    state: "",
-    resident: "",
+    stateOfResidence: "",
+    residentialAddress: "",
     lga: "",
     ward: "",
     pollingUnit: "",
     kycType: "",
   };
+
+  // plan
+  // age
+  // profileImageUrl
+  // kycImageUrl
+  // _id
 
   interface Values {
     email: string;
@@ -43,8 +51,8 @@ const MembershipForm = () => {
     sex: string;
     postCode: string;
     occupation: string;
-    state: string;
-    resident: string;
+    stateOfResidence: string;
+    residentialAddress: string;
     lga: string;
     ward: string;
     pollingUnit: string;
@@ -58,8 +66,8 @@ const MembershipForm = () => {
     sex: Yup.string().min(2, "Too Short!").max(50, "Too Long!").required(errorMessages.required),
     postCode: Yup.string().min(2, "Too Short!").max(50, "Too Long!").required(errorMessages.required),
     occupation: Yup.string().min(2, "Too Short!").max(50, "Too Long!").required(errorMessages.required),
-    state: Yup.string().min(2, "Too Short!").max(50, "Too Long!").required(errorMessages.required),
-    resident: Yup.string().min(2, "Too Short!").max(50, "Too Long!").required(errorMessages.required),
+    stateOfResidence: Yup.string().min(2, "Too Short!").max(50, "Too Long!").required(errorMessages.required),
+    residentialAddress: Yup.string().min(2, "Too Short!").max(50, "Too Long!").required(errorMessages.required),
     lga: Yup.string().min(2, "Too Short!").max(50, "Too Long!").required(errorMessages.required),
     ward: Yup.string().min(2, "Too Short!").max(50, "Too Long!").required(errorMessages.required),
     lastName: Yup.string().min(2, "Too Short!").max(50, "Too Long!").required(errorMessages.required),
@@ -85,11 +93,16 @@ const MembershipForm = () => {
       <div className="hidden smallLaptop:flex items-center justify-between">
         <div className="flex items-center cursor-pointer">
           <Icon name="caretLeft" />
-          <p className="font-semibold ml-2 whitespace-nowrap">Go Back</p>
+          <p className="font-semibold ml-2 whitespace-nowrap" onClick={() => router.push("/auth/login")}>
+            Go Back
+          </p>
         </div>
         <h3 className="text-[27px] bigLaptop:text-[40px] font-semibold">Membership Registration Form</h3>
         <span className="text-14">
-          Have an account? <span className="text-obiBlue-200 ml-2">Sign In</span>
+          Have an account?{" "}
+          <span className="text-obiBlue-200 ml-2" onClick={() => router.push("/auth/login")}>
+            Sign In
+          </span>
         </span>
       </div>
       <p className="hidden smallLaptop:blocktext-14 text-[#828282] pt-[52px]">Kindly fill in your details to continue</p>
@@ -132,7 +145,7 @@ const MembershipForm = () => {
                     />
                   </div>
                   <div className="flex items-center space-x-4 mt-8">
-                    <div>
+                    <div className="w-[50%]">
                       <CustomLabel className="mb-[0.438rem] text-14 text-obiGray-320" title="First Name" />
                       <FormikCustomInput
                         className="border border-glass-450 rounded-[0.313rem] h-[3.75rem] mr-4 mt-2 "
@@ -143,7 +156,7 @@ const MembershipForm = () => {
                         type="text"
                       />
                     </div>
-                    <div>
+                    <div className="w-[50%]">
                       <CustomLabel className="mb-[0.438rem] text-14 text-obiGray-320" title="Last Name" />
                       <FormikCustomInput
                         className="border border-glass-450 rounded-[0.313rem] h-[3.75rem] mr-4 mt-2 "
@@ -215,7 +228,7 @@ const MembershipForm = () => {
                         className="border border-glass-450 rounded-[0.313rem] h-[3.75rem] mr-4 mt-2 "
                         container="tablet:px-6"
                         inputClassName="placeholder:text-sm border-black"
-                        name="state"
+                        name="stateOfResidence"
                         placeholder="Lagos"
                         type="text"
                       />
@@ -228,7 +241,7 @@ const MembershipForm = () => {
                         className="border border-glass-450 rounded-[0.313rem] h-[3.75rem] mr-4 mt-2 "
                         container="tablet:px-6"
                         inputClassName="placeholder:text-sm border-black"
-                        name="resident"
+                        name="residentialAddress"
                         placeholder="Plot 104, Adamu Estate"
                         type="text"
                       />

@@ -2,9 +2,11 @@ import type { AppProps } from "next/app";
 import Router from "next/router";
 import NProgress from "nprogress";
 import React from "react";
-
 import "nprogress/nprogress.css";
 import "../styles/globals.css";
+import { Toaster } from "react-hot-toast";
+
+import AuthState from "@context/auth/AuthState";
 
 /**
  * App wrapper for the whole application
@@ -22,7 +24,12 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   Router.events.on("routeChangeComplete", () => NProgress.done());
   Router.events.on("routeChangeError", () => NProgress.done());
 
-  return <Component {...pageProps} />;
+  return (
+    <AuthState>
+      <Toaster position="top-right" />
+      <Component {...pageProps} />
+    </AuthState>
+  );
 };
 
 export default MyApp;

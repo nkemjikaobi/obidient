@@ -1,4 +1,5 @@
 import { Form, Formik, FormikProps } from "formik";
+import { pick } from "lodash";
 import { useRouter } from "next/router";
 import React from "react";
 import * as Yup from "yup";
@@ -8,14 +9,25 @@ import CustomButton from "@components/atoms/CustomButton/CustomButton";
 import FormikCustomInput from "@components/atoms/FormikCustomInput/FormikCustomInput";
 import Logo from "@components/atoms/Logo/Logo";
 
+import useAuth from "@hooks/useAuth";
+
 import { ButtonProperties, errorMessages } from "@shared/libs/helpers";
 
 import AuthBackground from "../AuthBackground/AuthBackground";
 
 yupPassword(Yup); // extend yup
 
+export interface RegisterFormDataProps {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phoneNumber: string;
+  password: string;
+}
+
 const RegisterForm = () => {
   const router = useRouter();
+  const { register, loading } = useAuth();
 
   const initialState = {
     firstName: "",
@@ -52,7 +64,10 @@ const RegisterForm = () => {
       .oneOf([Yup.ref("password"), null], errorMessages.passwordMatch),
   });
 
-  const registerUser = () => {};
+  const registerUser = async (values: Values) => {
+    const transformedValues = pick(values, ["firstName", "lastName", "email", "phoneNumber", "password"]);
+    await register(transformedValues, router);
+  };
 
   return (
     <div className="smallLaptop:flex">
@@ -122,6 +137,8 @@ const RegisterForm = () => {
                   <CustomButton
                     customClass="mt-12 !w-[80%]"
                     handleClick={() => {}}
+                    isDisabled={loading}
+                    isSubmitting={loading}
                     size={ButtonProperties.SIZES.big}
                     title="Create Account"
                     type="submit"

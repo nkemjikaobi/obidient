@@ -18,6 +18,7 @@
     "paths": {
       //These will be updated accordingly in future..These are just to accomodate absolute imports around the application.
       "@components/*": ["src/components/*"],
+      "@context/*": ["src/context/*"],
       "@hooks/*": ["src/hooks/*"],
       "@graphql/*": ["src/graphql/*"],
       "@schemas/*": ["src/schemas/*"],

@@ -1,3 +1,5 @@
+import axios from "axios";
+
 /**
  * Button properties for the custom button
  */
@@ -97,4 +99,17 @@ export const CheckBoxProperties = {
     small: "small",
     big: "big",
   },
+};
+
+export const NotificationTypes = {
+  SUCCESS: "success",
+  ERROR: "error",
+};
+
+export const setAuthToken = (token: string) => {
+  if (token) {
+    axios.defaults.headers.common["x-auth-token"] = token;
+  } else {
+    delete axios.defaults.headers.common["x-auth-token"];
+  }
 };

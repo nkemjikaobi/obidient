@@ -8,14 +8,22 @@ import CustomButton from "@components/atoms/CustomButton/CustomButton";
 import FormikCustomInput from "@components/atoms/FormikCustomInput/FormikCustomInput";
 import Logo from "@components/atoms/Logo/Logo";
 
+import useAuth from "@hooks/useAuth";
+
 import { ButtonProperties, errorMessages } from "@shared/libs/helpers";
 
 import AuthBackground from "../AuthBackground/AuthBackground";
 
 yupPassword(Yup); // extend yup
 
+export interface LoginFormDataProps {
+  email: string;
+  password: string;
+}
+
 const LoginForm = () => {
   const router = useRouter();
+  const { login, loading } = useAuth();
 
   const initialState = {
     email: "",
@@ -38,7 +46,10 @@ const LoginForm = () => {
       .minSymbols(1, errorMessages.minSymbol(1)),
   });
 
-  const loginUser = () => {};
+  const loginUser = async (values: Values) => {
+    const transformedValues = { phoneOrEmail: values.email, password: values.password };
+    await login(transformedValues, router);
+  };
 
   return (
     <div className="smallLaptop:flex">
@@ -75,6 +86,8 @@ const LoginForm = () => {
                   <CustomButton
                     customClass="mt-12 !w-[80%]"
                     handleClick={() => {}}
+                    isDisabled={loading}
+                    isSubmitting={loading}
                     size={ButtonProperties.SIZES.big}
                     title="Login"
                     type="submit"

@@ -1,5 +1,6 @@
 import { Form, Formik, FormikProps } from "formik";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import React from "react";
 import * as Yup from "yup";
 
@@ -15,6 +16,7 @@ import { ButtonProperties, CURRENCIES } from "@shared/libs/helpers";
 import "react-datepicker/dist/react-datepicker.css";
 
 const MembershipForm2 = () => {
+  const router = useRouter();
   const membershipData = [
     {
       id: 1,
@@ -51,11 +53,16 @@ const MembershipForm2 = () => {
       <div className="hidden smallLaptop:flex items-center justify-between">
         <div className="flex items-center cursor-pointer">
           <Icon name="caretLeft" />
-          <p className="font-semibold ml-2 whitespace-nowrap">Go Back</p>
+          <p className="font-semibold ml-2 whitespace-nowrap" onClick={() => router.push("/auth/membership-form")}>
+            Go Back
+          </p>{" "}
         </div>
         <h3 className="text-[27px] bigLaptop:text-[40px] font-semibold">Membership Registration Form</h3>
         <span className="text-14">
-          Have an account? <span className="text-obiBlue-200 ml-2">Sign In</span>
+          Have an account?{" "}
+          <span className="text-obiBlue-200 ml-2" onClick={() => router.push("/auth/login")}>
+            Sign In
+          </span>
         </span>
       </div>
       <p className="hidden smallLaptop:block text-14 text-[#828282] pt-[52px]">Kindly fill in your details to continue</p>
