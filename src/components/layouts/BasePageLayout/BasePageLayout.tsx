@@ -47,6 +47,7 @@ const BasePageLayout = ({ children, showNavigation, showDesktopNavigation, showM
         <title>{title}</title>
         <meta content={description} name="description" />
         <meta content={keywords} name="keywords" />
+        <link href="/favicon.ico" rel="icon" />
       </Head>
       <section className="smallLaptop:px-0">
         {showNavigation && (

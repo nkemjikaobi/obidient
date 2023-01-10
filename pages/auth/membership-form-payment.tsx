@@ -26,6 +26,7 @@ const MembershipFormPage: NextPage = () => {
     <div>
       <Head>
         <title>Obidient Membership Form</title>
+        <link href="/favicon.ico" rel="icon" />
       </Head>
       <div>
         <MembershipForm2 />
