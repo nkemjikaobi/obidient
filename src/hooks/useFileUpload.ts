@@ -11,7 +11,7 @@ const useFileUpload = () => {
     formData.append("upload_preset", "e50lv9tp");
     formData.append("file", file[0]);
 
-    const data = await fetch("https://api.cloudinary.com/v1_1/dkjla10fg/image/upload", {
+    const data = await fetch(`${process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_URL}`, {
       method: "POST",
       body: formData,
     }).then((r) => r.json());
