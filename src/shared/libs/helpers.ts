@@ -61,7 +61,7 @@ export const CURRENCIES = {
 };
 
 export const TransactionStatus = {
-  SUCCESSFUL: "successful",
+  SUCCESSFUL: "success",
 };
 
 /**

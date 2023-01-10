@@ -24,6 +24,8 @@ import {
   GET_MEMBERSHIP_PLANS_ERROR,
   INITIALIZE_TRANSACTION_SUCCESS,
   INITIALIZE_TRANSACTION_FAILURE,
+  GET_TRANSACTIONS_SUCCESS,
+  GET_TRANSACTIONS_ERROR,
 } from "../types";
 import AuthContext from "./AuthContext";
 import AuthReducer from "./AuthReducer";
@@ -38,6 +40,7 @@ const AuthState = (props: any) => {
     message: null,
     membershipPlans: [],
     transaction: null,
+    allTransactions: [],
   };
 
   const [state, dispatch] = useReducer(AuthReducer, initialState);
@@ -52,26 +55,31 @@ const AuthState = (props: any) => {
 
   // Load User
   const loadUser = async (router?: NextRouter) => {
-    if (localStorage.token) {
-      setAuthToken(localStorage.token);
-    }
-    try {
-      const res = await customAxios.get("/user/me");
-      dispatch({
-        type: USER_LOADED,
-        payload: res.data.data,
-      });
-    } catch (err: any) {
-      dispatch({
-        type: AUTH_ERROR,
-        payload: err.response.data.message,
-      });
-      if (router) {
-        setTimeout(() => {
-          router.push("/auth/login");
-        }, 1500);
+    const fetchUser = async () => {
+      if (localStorage.token) {
+        setAuthToken(localStorage.token);
       }
-    }
+      try {
+        const res = await customAxios.get("/user/me");
+        dispatch({
+          type: USER_LOADED,
+          payload: res.data.data,
+        });
+      } catch (err: any) {
+        dispatch({
+          type: AUTH_ERROR,
+          payload: err.response.data.message,
+        });
+      }
+    };
+    setTimeout(() => {
+      fetchUser();
+    }, 1500);
+    // if (router) {
+    //   setTimeout(() => {
+    //     router.push("/auth/login");
+    //   }, 1500);
+    // }
   };
 
   // Register User
@@ -117,7 +125,7 @@ const AuthState = (props: any) => {
         payload: res.data.data,
       });
 
-      loadUser();
+      await loadUser();
 
       if (!res.data.data.user.membershipRegistration) {
         router.push("/auth/membership-form");
@@ -206,6 +214,36 @@ const AuthState = (props: any) => {
     }
   };
 
+  // Get Transactions
+  const getTransactions = async () => {
+    setLoading(true);
+
+    try {
+      const res = await customAxios.get("/transaction/me");
+
+      const result = res.data.data.map((transaction: any) => ({
+        id: transaction._id,
+        transactionType: transaction.channel,
+        createdAt: transaction.transaction_date,
+        amount: transaction.amount,
+        currency: transaction.currency,
+        description: transaction.description,
+        status: transaction.status,
+        reference: transaction.reference,
+      }));
+
+      dispatch({
+        type: GET_TRANSACTIONS_SUCCESS,
+        payload: result,
+      });
+    } catch (err: any) {
+      dispatch({
+        type: GET_TRANSACTIONS_ERROR,
+        payload: err.response.data.message,
+      });
+    }
+  };
+
   // Initialize Transaction
   const intializeTransaction = async (details: any) => {
     setLoading(true);
@@ -241,6 +279,7 @@ const AuthState = (props: any) => {
         message: state.message,
         membershipPlans: state.membershipPlans,
         transaction: state.transaction,
+        allTransactions: state.allTransactions,
         register,
         clearErrors,
         loadUser,
@@ -251,6 +290,7 @@ const AuthState = (props: any) => {
         membershipRegistration,
         getMembershipPlans,
         intializeTransaction,
+        getTransactions,
       }}
     >
       {props.children}

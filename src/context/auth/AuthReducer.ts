@@ -14,6 +14,8 @@ import {
   GET_MEMBERSHIP_PLANS_ERROR,
   INITIALIZE_TRANSACTION_SUCCESS,
   INITIALIZE_TRANSACTION_FAILURE,
+  GET_TRANSACTIONS_SUCCESS,
+  GET_TRANSACTIONS_ERROR,
 } from "../types";
 
 const AuthReducer = (state: any, action: any) => {
@@ -26,7 +28,7 @@ const AuthReducer = (state: any, action: any) => {
         loading: false,
       };
     case AUTH_ERROR:
-      localStorage.removeItem("token");
+      // localStorage.removeItem("token");
       return {
         ...state,
         token: null,
@@ -113,6 +115,18 @@ const AuthReducer = (state: any, action: any) => {
         loading: false,
       };
     case GET_MEMBERSHIP_PLANS_ERROR:
+      return {
+        ...state,
+        error: action.payload,
+        loading: false,
+      };
+    case GET_TRANSACTIONS_SUCCESS:
+      return {
+        ...state,
+        allTransactions: action.payload,
+        loading: false,
+      };
+    case GET_TRANSACTIONS_ERROR:
       return {
         ...state,
         error: action.payload,

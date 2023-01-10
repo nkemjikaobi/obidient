@@ -2,6 +2,8 @@ import React from "react";
 
 import Icon from "@components/atoms/Icons";
 
+import { changeDateFormat } from "@shared/libs/helpers";
+
 import { TransactionProp } from "./WalletTransactions";
 
 interface TransactionItemProps {
@@ -17,11 +19,14 @@ const TransactionItem: React.FC<TransactionItemProps> = ({ transaction }) => {
             <Icon name="card2" />
           </div>
           <div className="ml-2">
-            <p className="font-medium">{transaction.transactionType}</p>
-            <p className="text-14 mt-2 text-obiGray-320">{transaction.createdAt}</p>
+            <p className="font-medium capitalize">{transaction.transactionType}</p>
+            <p className="text-14 mt-2 text-obiGray-320">{changeDateFormat(transaction?.createdAt, "DD MMM YYYY - LT")}</p>
           </div>
         </div>
-        <p className="ml-8"> + {transaction.amount} LPO</p>
+        <p className="ml-8">
+          {" "}
+          + {transaction.amount} {transaction?.currency}
+        </p>
       </div>
       <hr />
     </>
