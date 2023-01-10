@@ -20,6 +20,10 @@ import {
   CLEAR_MESSAGES,
   MEMBERSHIP_REGISTRATION_SUCCESS,
   MEMBERSHIP_REGISTRATION_FAIL,
+  GET_MEMBERSHIP_PLANS_SUCCESS,
+  GET_MEMBERSHIP_PLANS_ERROR,
+  INITIALIZE_TRANSACTION_SUCCESS,
+  INITIALIZE_TRANSACTION_FAILURE,
 } from "../types";
 import AuthContext from "./AuthContext";
 import AuthReducer from "./AuthReducer";
@@ -32,6 +36,8 @@ const AuthState = (props: any) => {
     user: null,
     error: null,
     message: null,
+    membershipPlans: [],
+    transaction: null,
   };
 
   const [state, dispatch] = useReducer(AuthReducer, initialState);
@@ -45,7 +51,7 @@ const AuthState = (props: any) => {
   });
 
   // Load User
-  const loadUser = async () => {
+  const loadUser = async (router?: NextRouter) => {
     if (localStorage.token) {
       setAuthToken(localStorage.token);
     }
@@ -60,6 +66,11 @@ const AuthState = (props: any) => {
         type: AUTH_ERROR,
         payload: err.response.data.message,
       });
+      if (router) {
+        setTimeout(() => {
+          router.push("/auth/login");
+        }, 1500);
+      }
     }
   };
 
@@ -169,6 +180,56 @@ const AuthState = (props: any) => {
     }
   };
 
+  // Get Membership Plans
+  const getMembershipPlans = async () => {
+    setLoading(true);
+
+    try {
+      const res = await customAxios.get("/plan/active");
+
+      const result = res.data.data.map((plan: any) => ({
+        id: plan._id,
+        label: plan.label,
+        value: plan._id,
+        name: "plan",
+      }));
+
+      dispatch({
+        type: GET_MEMBERSHIP_PLANS_SUCCESS,
+        payload: result,
+      });
+    } catch (err: any) {
+      dispatch({
+        type: GET_MEMBERSHIP_PLANS_ERROR,
+        payload: err.response.data.message,
+      });
+    }
+  };
+
+  // Initialize Transaction
+  const intializeTransaction = async (details: any) => {
+    setLoading(true);
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    try {
+      setLoading(true);
+      const res = await customAxios.post(`/payment/initialize`, details, config);
+      dispatch({
+        type: INITIALIZE_TRANSACTION_SUCCESS,
+        payload: res.data.data,
+      });
+    } catch (err: any) {
+      dispatch({
+        type: INITIALIZE_TRANSACTION_FAILURE,
+        payload: err.response.data.message,
+      });
+    }
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -178,6 +239,8 @@ const AuthState = (props: any) => {
         user: state.user,
         error: state.error,
         message: state.message,
+        membershipPlans: state.membershipPlans,
+        transaction: state.transaction,
         register,
         clearErrors,
         loadUser,
@@ -186,6 +249,8 @@ const AuthState = (props: any) => {
         setLoading,
         clearMessages,
         membershipRegistration,
+        getMembershipPlans,
+        intializeTransaction,
       }}
     >
       {props.children}

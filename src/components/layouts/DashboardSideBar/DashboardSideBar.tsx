@@ -4,10 +4,14 @@ import React from "react";
 import CustomLink from "@components/atoms/CustomLink/CustomLink";
 import Icon from "@components/atoms/Icons";
 
+import useAuth from "@hooks/useAuth";
+
 const DashboardSideBar = () => {
   const router = useRouter();
+  const { logout } = useAuth();
 
-  const logout = () => {
+  const onLogOut = () => {
+    logout();
     router.push("/auth/login");
   };
 
@@ -23,7 +27,7 @@ const DashboardSideBar = () => {
           </li>
         ))}
         <li className="flex items-center space-x-4 cursor-pointer">
-          <Icon name="logout" onClick={() => logout()} />
+          <Icon name="logout" onClick={() => onLogOut()} />
         </li>
       </ul>
     </div>

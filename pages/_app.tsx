@@ -26,7 +26,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
 
   return (
     <AuthState>
-      <Toaster position="top-right" />
+      <Toaster position="bottom-left" />
       <Component {...pageProps} />
     </AuthState>
   );

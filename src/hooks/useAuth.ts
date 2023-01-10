@@ -13,6 +13,8 @@ const useAuth = () => {
     setLoading,
     clearMessages,
     membershipRegistration,
+    getMembershipPlans,
+    intializeTransaction,
 
     // state variables
     token,
@@ -21,6 +23,8 @@ const useAuth = () => {
     user,
     error,
     message,
+    membershipPlans,
+    transaction,
   } = useContext(AuthContext);
 
   return {
@@ -32,6 +36,8 @@ const useAuth = () => {
     setLoading,
     clearMessages,
     membershipRegistration,
+    getMembershipPlans,
+    intializeTransaction,
 
     // state variables
     token,
@@ -40,6 +46,8 @@ const useAuth = () => {
     user,
     error,
     message,
+    membershipPlans,
+    transaction,
   };
 };
 

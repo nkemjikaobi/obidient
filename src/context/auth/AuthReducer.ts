@@ -10,6 +10,10 @@ import {
   SET_LOADING,
   MEMBERSHIP_REGISTRATION_SUCCESS,
   MEMBERSHIP_REGISTRATION_FAIL,
+  GET_MEMBERSHIP_PLANS_SUCCESS,
+  GET_MEMBERSHIP_PLANS_ERROR,
+  INITIALIZE_TRANSACTION_SUCCESS,
+  INITIALIZE_TRANSACTION_FAILURE,
 } from "../types";
 
 const AuthReducer = (state: any, action: any) => {
@@ -101,6 +105,30 @@ const AuthReducer = (state: any, action: any) => {
       return {
         ...state,
         loading: action.payload,
+      };
+    case GET_MEMBERSHIP_PLANS_SUCCESS:
+      return {
+        ...state,
+        membershipPlans: action.payload,
+        loading: false,
+      };
+    case GET_MEMBERSHIP_PLANS_ERROR:
+      return {
+        ...state,
+        error: action.payload,
+        loading: false,
+      };
+    case INITIALIZE_TRANSACTION_SUCCESS:
+      return {
+        ...state,
+        transaction: action.payload,
+        loading: false,
+      };
+    case INITIALIZE_TRANSACTION_FAILURE:
+      return {
+        ...state,
+        error: action.payload,
+        loading: false,
       };
     default:
       return state;
