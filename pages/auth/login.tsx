@@ -28,6 +28,7 @@ const Login: NextPage = () => {
     } catch (error: any) {
       showToast(error.response.data.message, NotificationTypes.ERROR);
     }
+    router.push("/auth/login");
   };
 
   useEffect(() => {
