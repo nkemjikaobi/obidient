@@ -2,12 +2,13 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import React from "react";
 import { useEffect } from "react";
+import { showToast } from "src/helpers/showToast";
 
 import MembershipForm2 from "@components/organisms/MembershipPage/MembershipForm2/MembershipForm2";
 
 import useAuth from "@hooks/useAuth";
 
-import { setAuthToken } from "@shared/libs/helpers";
+import { NotificationTypes, setAuthToken } from "@shared/libs/helpers";
 
 const MembershipFormPage: NextPage = () => {
   const { loadUser } = useAuth();
@@ -21,6 +22,22 @@ const MembershipFormPage: NextPage = () => {
   useEffect(() => {
     loadUser();
   }, []);
+
+  const { error, clearErrors, message, clearMessages } = useAuth();
+
+  useEffect(() => {
+    if (error) {
+      showToast(error, NotificationTypes.ERROR);
+      clearErrors();
+    }
+  }, [error]);
+
+  useEffect(() => {
+    if (message) {
+      showToast(message, NotificationTypes.SUCCESS);
+      clearMessages();
+    }
+  });
 
   return (
     <div>

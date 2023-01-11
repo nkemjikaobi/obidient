@@ -37,8 +37,8 @@ const FormikCustomCheckbox = ({ label, shape, isDisabled, size, labelPosition, c
                 ? "rounded-full"
                 : `${shape === CheckBoxProperties.SHAPE.square && shape === CheckBoxProperties.SIZES.small ? "rounded-[4px]" : "rounded-[5px]"}`
             } 
-            mx-2  cursor-pointer drop-shadow-sm bg-white border border-citiGray-50 hover:border-citiBlue-400 hover:bg-citiBlue-100
-            text-citiBlue-400 hover:text-citiBlue-600 border-[#EBEFF1] focus:ring-0`}
+            mx-2  cursor-pointer drop-shadow-sm bg-white border border-black hover:border-citiBlue-400 hover:bg-citiBlue-100
+            text-citiBlue-400 hover:text-citiBlue-600 focus:ring-0`}
               type="checkbox"
               {...props}
             />

@@ -2,7 +2,7 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { ImSpinner9 } from "react-icons/im";
-import showToast from "src/helpers/showToast";
+import { showToast } from "src/helpers/showToast";
 
 import CustomButton from "@components/atoms/CustomButton/CustomButton";
 import CustomLink from "@components/atoms/CustomLink/CustomLink";

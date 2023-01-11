@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import { useDropzone } from "react-dropzone";
-import showToast from "src/helpers/showToast";
+import { showToast } from "src/helpers/showToast";
 import * as Yup from "yup";
 
 import CustomButton from "@components/atoms/CustomButton/CustomButton";
@@ -135,6 +135,10 @@ const MembershipForm = () => {
       text: "passport",
       value: "passport",
     },
+    {
+      text: "voter's card",
+      value: "voters_card",
+    },
   ];
 
   return (
@@ -147,12 +151,7 @@ const MembershipForm = () => {
           </p>
         </div>
         <h3 className="text-[27px] bigLaptop:text-[40px] font-semibold">Membership Registration Form</h3>
-        <span className="text-14">
-          Have an account?{" "}
-          <span className="text-obiBlue-200 ml-2" onClick={() => router.push("/auth/login")}>
-            Sign In
-          </span>
-        </span>
+        <span className="text-14">All fields are required *</span>
       </div>
       <p className="hidden smallLaptop:blocktext-14 text-[#828282] pt-[52px]">Kindly fill in your details to continue</p>
       <div>

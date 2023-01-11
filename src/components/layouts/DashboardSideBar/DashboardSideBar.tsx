@@ -42,24 +42,24 @@ const DashboardSideBarData = [
     icon: "grid",
     route: "/dashboard",
   },
-  {
-    id: 2,
-    icon: "card",
-    route: "#",
-  },
-  {
-    id: 3,
-    icon: "cash",
-    route: "#",
-  },
-  {
-    id: 4,
-    icon: "wallet",
-    route: "#",
-  },
-  {
-    id: 5,
-    icon: "transaction",
-    route: "#",
-  },
+  // {
+  //   id: 2,
+  //   icon: "card",
+  //   route: "#",
+  // },
+  // {
+  //   id: 3,
+  //   icon: "cash",
+  //   route: "#",
+  // },
+  // {
+  //   id: 4,
+  //   icon: "wallet",
+  //   route: "#",
+  // },
+  // {
+  //   id: 5,
+  //   icon: "transaction",
+  //   route: "#",
+  // },
 ];

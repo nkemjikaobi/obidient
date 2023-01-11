@@ -29,7 +29,7 @@ const PaymentStatusPage: NextPage = () => {
         <title>Obidient Membership Form</title>
         <link href="/favicon.ico" rel="icon" />
       </Head>
-      <div className="bg-[#F5FAFF] py-64">
+      <div className="bg-[#F5FAFF] smallLaptop:py-64">
         <PaymentStatus />
       </div>
     </div>

@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { ImSpinner9 } from "react-icons/im";
-import showToast from "src/helpers/showToast";
+import { showToast } from "src/helpers/showToast";
 import * as Yup from "yup";
 
 import CustomButton from "@components/atoms/CustomButton/CustomButton";
@@ -63,12 +63,7 @@ const MembershipForm2 = () => {
           </p>{" "}
         </div>
         <h3 className="text-[27px] bigLaptop:text-[40px] font-semibold">Membership Registration Form</h3>
-        <span className="text-14">
-          Have an account?{" "}
-          <span className="text-obiBlue-200 ml-2" onClick={() => router.push("/auth/login")}>
-            Sign In
-          </span>
-        </span>
+        <span className="text-14">Choose plan</span>
       </div>
       <p className="hidden smallLaptop:block text-14 text-[#828282] pt-[52px]">Kindly fill in your details to continue</p>
       <div>
@@ -138,9 +133,9 @@ const MembershipForm2 = () => {
                     </div>
                     <FormikCustomCheckbox
                       checked={props.values.terms}
-                      className="!border-gray-400 w-5 h-5  rounded-lg"
+                      className="!border-black w-12 h-12  rounded-lg"
                       label="Please check to acknowledge Privacy/terms policy"
-                      labelClassName="text-12 smallLaptop:text-14 font-normal whitespace-nowrap"
+                      labelClassName="text-14 smallLaptop:text-16 font-normal whitespace-nowrap"
                       labelPosition="end"
                       name="terms"
                       onChange={props.handleChange}
