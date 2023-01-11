@@ -90,7 +90,7 @@ const MembershipForm2 = () => {
               by signing up you agree to our <span className="text-obiBlue-200">terms and conditions</span> and <span className="text-obiBlue-200">privacy policy</span>
             </p>
             <div className="flex items-center">
-              <Image alt="" height={98} src="/images/png/confirmDp.png" width={78} />
+              <Image alt="" height={98} src="/images/png/confirmDp2.png" width={78} />
               <div className="ml-8 text-14 smallLaptop:text-16">
                 <p>
                   Name: {user?.firstName} {user?.lastName}
