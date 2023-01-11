@@ -25,7 +25,7 @@ const CreateAccount: NextPage = () => {
       showToast(message, NotificationTypes.SUCCESS);
       clearMessages();
     }
-  });
+  }, [message]);
   return (
     <BasePageLayout showDesktopNavigation={false} showFooter={false} showMobileNavigation={true} showNavigation={true} title="Obidient Create Account">
       <RegisterPage />

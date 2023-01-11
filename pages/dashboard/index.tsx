@@ -25,7 +25,7 @@ const Home: NextPage = () => {
       showToast(message, NotificationTypes.SUCCESS);
       clearMessages();
     }
-  });
+  }, [message]);
 
   return (
     <DashboardLayout title="Obidient Dashboard">

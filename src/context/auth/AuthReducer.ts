@@ -43,7 +43,7 @@ const AuthReducer = (state: any, action: any) => {
         ...action.payload,
         isAuthenticated: false,
         loading: false,
-        message: "Registration Success. You will be redirected shortly",
+        message: "Registration Success. Check your email to verify account",
       };
     case REGISTER_FAIL:
       localStorage.removeItem("token");

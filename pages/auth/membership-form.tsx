@@ -36,7 +36,7 @@ const MembershipFormPage: NextPage = () => {
       showToast(message, NotificationTypes.SUCCESS);
       clearMessages();
     }
-  });
+  }, [message]);
 
   return (
     <div>
