@@ -5,27 +5,29 @@ import React, { useReducer } from "react";
 import { LoginFormDataProps } from "@components/organisms/AuthPage/LoginForm/LoginForm";
 import { RegisterFormDataProps } from "@components/organisms/AuthPage/RegisterForm/RegisterForm";
 
-import { setAuthToken } from "@shared/libs/helpers";
+import useAlert from "@hooks/useAlert";
+import useWallet from "@hooks/useWallet";
+
+import { MembershipStatus, NotificationTypes, setAuthToken } from "@shared/libs/helpers";
 
 import {
   REGISTER_SUCCESS,
-  REGISTER_FAIL,
   USER_LOADED,
-  AUTH_ERROR,
   LOGIN_SUCCESS,
-  LOGIN_FAIL,
   LOGOUT,
   CLEAR_ERRORS,
   SET_LOADING,
   CLEAR_MESSAGES,
   MEMBERSHIP_REGISTRATION_SUCCESS,
-  MEMBERSHIP_REGISTRATION_FAIL,
   GET_MEMBERSHIP_PLANS_SUCCESS,
-  GET_MEMBERSHIP_PLANS_ERROR,
   INITIALIZE_TRANSACTION_SUCCESS,
-  INITIALIZE_TRANSACTION_FAILURE,
   GET_TRANSACTIONS_SUCCESS,
+  REGISTER_FAIL,
+  LOGIN_FAIL,
+  MEMBERSHIP_REGISTRATION_FAIL,
+  GET_MEMBERSHIP_PLANS_ERROR,
   GET_TRANSACTIONS_ERROR,
+  INITIALIZE_TRANSACTION_FAILURE,
 } from "../types";
 import AuthContext from "./AuthContext";
 import AuthReducer from "./AuthReducer";
@@ -44,6 +46,9 @@ const AuthState = (props: any) => {
   };
 
   const [state, dispatch] = useReducer(AuthReducer, initialState);
+
+  const { setAlert } = useAlert();
+  const { connectWallet } = useWallet();
 
   const customAxios = axios.create({
     baseURL: `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1`,
@@ -66,10 +71,7 @@ const AuthState = (props: any) => {
           payload: res.data.data,
         });
       } catch (err: any) {
-        dispatch({
-          type: AUTH_ERROR,
-          payload: err.response.data.message,
-        });
+        setAlert(err.response.data.message, NotificationTypes.ERROR);
       }
     };
     setTimeout(() => {
@@ -97,6 +99,7 @@ const AuthState = (props: any) => {
         type: REGISTER_SUCCESS,
         payload: res.data.data,
       });
+      setAlert("Registration Success. Check your email to verify account", NotificationTypes.SUCCESS);
 
       setTimeout(() => {
         router.push("/auth/login");
@@ -104,8 +107,8 @@ const AuthState = (props: any) => {
     } catch (err: any) {
       dispatch({
         type: REGISTER_FAIL,
-        payload: err.response.data.message,
       });
+      setAlert(err.response.data.message, NotificationTypes.ERROR);
     }
   };
 
@@ -127,18 +130,22 @@ const AuthState = (props: any) => {
 
       await loadUser();
 
-      if (!res.data.data.user.membershipRegistration) {
-        router.push("/auth/membership-form");
-      } else if (!res.data.data.user.hasSubscribed) {
-        router.push("/auth/membership-form-payment");
-      } else {
-        router.push("/dashboard");
+      const connectionStatus = await connectWallet();
+
+      if (connectionStatus) {
+        if (!res.data.data.user.membershipRegistration) {
+          router.push("/auth/membership-form");
+        } else if (res.data.data.user?.current_subscription?.status !== MembershipStatus.ACTIVE) {
+          router.push("/auth/membership-form-payment");
+        } else {
+          router.push("/dashboard");
+        }
       }
     } catch (err: any) {
       dispatch({
         type: LOGIN_FAIL,
-        payload: err.response.data.message,
       });
+      setAlert(err.response.data.message, NotificationTypes.ERROR);
     }
   };
 
@@ -175,6 +182,8 @@ const AuthState = (props: any) => {
         payload: res.data.data,
       });
 
+      setAlert("Registration Success. You will be redirected shortly", NotificationTypes.SUCCESS);
+
       loadUser();
 
       setTimeout(() => {
@@ -183,8 +192,8 @@ const AuthState = (props: any) => {
     } catch (err: any) {
       dispatch({
         type: MEMBERSHIP_REGISTRATION_FAIL,
-        payload: err.response.data.message,
       });
+      setAlert(err.response.data.message, NotificationTypes.ERROR);
     }
   };
 
@@ -209,8 +218,8 @@ const AuthState = (props: any) => {
     } catch (err: any) {
       dispatch({
         type: GET_MEMBERSHIP_PLANS_ERROR,
-        payload: err.response.data.message,
       });
+      setAlert(err.response.data.message, NotificationTypes.ERROR);
     }
   };
 
@@ -239,8 +248,8 @@ const AuthState = (props: any) => {
     } catch (err: any) {
       dispatch({
         type: GET_TRANSACTIONS_ERROR,
-        payload: err.response.data.message,
       });
+      setAlert(err.response.data.message, NotificationTypes.ERROR);
     }
   };
 
@@ -263,8 +272,8 @@ const AuthState = (props: any) => {
     } catch (err: any) {
       dispatch({
         type: INITIALIZE_TRANSACTION_FAILURE,
-        payload: err.response.data.message,
       });
+      setAlert(err.response.data.message, NotificationTypes.ERROR);
     }
   };
 

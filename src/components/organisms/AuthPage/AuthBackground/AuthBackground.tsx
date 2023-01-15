@@ -4,7 +4,7 @@ import React from "react";
 const AuthBackground = () => {
   return (
     <div className="hidden smallLaptop:block smallLaptop:relative smallLaptop:w-[60%] smallLaptop:min-h-[1117px]">
-      <Image alt="obidient token" fill src="/images/png/authBg.png" />
+      <Image alt="obidient token" layout="fill" src="/images/png/authBg.png" />
       <div className="absolute top-[80px] text-white left-[80px]">
         <h3 className="text-16 bigLaptop:text-18 font-semibold mb-[11px]">Featured</h3>
         <h1 className="font-semibold text-[30px] bigLaptop:text-[40px] mb-6 w-[70%]">Welcome to Obidient Token Tokenized Party Membership portal.</h1>

@@ -1,11 +1,14 @@
 import React from "react";
 
+import useWallet from "@hooks/useWallet";
+
 const TotalBalance = () => {
+  const { balance } = useWallet();
   return (
     <div className="border rounded-[7px] border-obiGray-320">
       <h4 className="text-14 smallLaptop:text-18 mt-[31px] mb-[6px] text-center whitespace-nowrap">Your total balance </h4>
-      <h4 className="text-[30px] smallLaptop:text-[40px] font-medium mb-[5px] text-center whitespace-nowrap">121.226 LPO </h4>
-      <h4 className="text-14 smallLaptop:text-18 text-obiGray-320 mb-[23px] text-center">12,000 NGN </h4>
+      <h4 className="text-[30px] smallLaptop:text-[40px] font-medium mb-[5px] text-center whitespace-nowrap"> {Number(balance).toFixed(4)} ETH</h4>
+      {/* <h4 className="text-14 smallLaptop:text-18 text-obiGray-320 mb-[23px] text-center">12,000 NGN </h4> */}
       {/* <div className="flex items-center">
           <CustomButton
             customClass="mt-12 !w-[100px] !bg-obiPurple-400"

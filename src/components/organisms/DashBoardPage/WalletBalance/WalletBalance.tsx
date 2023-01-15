@@ -4,13 +4,18 @@ import { v4 as uuidv4 } from "uuid";
 
 import Icon from "@components/atoms/Icons";
 
+import useWallet from "@hooks/useWallet";
+
+import { shortenWalletAddress } from "@shared/libs/helpers";
+
 import RenderBalance from "../RenderBalance/RenderBalance";
 
 const WalletBalance = () => {
   const [balanceToRender, setBalanceToRender] = useState<number>(1);
+  const { address } = useWallet();
   return (
     <div className="pt-6 smallLaptop:pt-[35px] px-6 smallLaptop:px-[46px]">
-      <h4 className="text-16 smallLaptop:text-18 mt-[35px] mb-[15px]">Your Wallet ID : 2567WWG68 </h4>
+      <h4 className="text-16 smallLaptop:text-18 mt-[35px] mb-[15px]">Your Wallet ID : {shortenWalletAddress(address)} </h4>
       <RenderBalance balanceToRender={balanceToRender} />
       <div className="flex items-center space-x-4 justify-center mt-8">
         {range(3).map((ind) =>

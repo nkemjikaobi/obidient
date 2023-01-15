@@ -43,7 +43,6 @@ const AuthReducer = (state: any, action: any) => {
         ...action.payload,
         isAuthenticated: false,
         loading: false,
-        message: "Registration Success. Check your email to verify account",
       };
     case REGISTER_FAIL:
       localStorage.removeItem("token");
@@ -53,20 +52,17 @@ const AuthReducer = (state: any, action: any) => {
         isAuthenticated: false,
         loading: false,
         user: null,
-        error: action.payload,
       };
     case MEMBERSHIP_REGISTRATION_SUCCESS:
       return {
         ...state,
         ...action.payload,
         loading: false,
-        message: "Registration Success. You will be redirected shortly",
       };
     case MEMBERSHIP_REGISTRATION_FAIL:
       return {
         ...state,
         loading: false,
-        error: action.payload,
       };
     case LOGIN_SUCCESS:
       localStorage.setItem("token", action.payload.token);
@@ -85,7 +81,6 @@ const AuthReducer = (state: any, action: any) => {
         isAuthenticated: false,
         loading: false,
         user: null,
-        error: action.payload,
       };
     case LOGOUT:
       localStorage.removeItem("token");
@@ -95,7 +90,6 @@ const AuthReducer = (state: any, action: any) => {
         isAuthenticated: false,
         loading: false,
         user: null,
-        error: action.payload,
       };
 
     case CLEAR_ERRORS:
@@ -129,7 +123,6 @@ const AuthReducer = (state: any, action: any) => {
     case GET_TRANSACTIONS_ERROR:
       return {
         ...state,
-        error: action.payload,
         loading: false,
       };
     case INITIALIZE_TRANSACTION_SUCCESS:
@@ -141,7 +134,6 @@ const AuthReducer = (state: any, action: any) => {
     case INITIALIZE_TRANSACTION_FAILURE:
       return {
         ...state,
-        error: action.payload,
         loading: false,
       };
     default:

@@ -5,13 +5,16 @@ import CustomLink from "@components/atoms/CustomLink/CustomLink";
 import Icon from "@components/atoms/Icons";
 
 import useAuth from "@hooks/useAuth";
+import useWallet from "@hooks/useWallet";
 
 const DashboardSideBar = () => {
   const router = useRouter();
   const { logout } = useAuth();
+  const { disconnectWallet, web3Modal } = useWallet();
 
   const onLogOut = () => {
     logout();
+    disconnectWallet(web3Modal, router);
     router.push("/auth/login");
   };
 

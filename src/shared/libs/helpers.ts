@@ -1,5 +1,6 @@
 import axios from "axios";
 import moment from "moment";
+import Web3 from "web3";
 
 /**
  * Button properties for the custom button
@@ -62,6 +63,11 @@ export const CURRENCIES = {
 
 export const TransactionStatus = {
   SUCCESSFUL: "success",
+};
+
+export const MembershipStatus = {
+  ACTIVE: "active",
+  INACTIVE: "inactive",
 };
 
 /**
@@ -150,3 +156,20 @@ export interface CloudinaryImageProps {
   existing: boolean;
   original_filename: string;
 }
+
+export const convertToEther = (web3: Web3, price: string) => {
+  if (web3) {
+    return web3.utils.fromWei(price, "ether");
+  }
+};
+
+export const shortenWalletAddress = (address: string) => {
+  if (address) {
+    const firstPart = address.slice(0, 6);
+    const lastPart = address.slice(-4);
+
+    const finalOuput = `${firstPart}...${lastPart}`;
+
+    return finalOuput;
+  }
+};

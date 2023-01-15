@@ -15,6 +15,7 @@ import FormikCustomInput from "@components/atoms/FormikCustomInput/FormikCustomI
 import Icon from "@components/atoms/Icons";
 
 import useAuth from "@hooks/useAuth";
+import useWallet from "@hooks/useWallet";
 
 import { ButtonProperties, NotificationTypes } from "@shared/libs/helpers";
 
@@ -24,6 +25,7 @@ const MembershipForm2 = () => {
   const router = useRouter();
   const { user, getMembershipPlans, membershipPlans, loading, intializeTransaction, transaction } = useAuth();
   const [selectedPlan, setSelectedPlan] = useState("");
+  const { address } = useWallet();
 
   useEffect(() => {
     getMembershipPlans();
@@ -48,8 +50,20 @@ const MembershipForm2 = () => {
       return showToast("Select a plan", NotificationTypes.ERROR);
     }
 
+    if (!address) {
+      return showToast("Connect Wallet", NotificationTypes.ERROR);
+    }
+
     const transformedValues = pick(values, ["description"]);
-    const finalPayload = { ...transformedValues, plan: selectedPlan, user_id: user?._id, email: user?.email, firstName: user?.firstName, lastName: user?.lastName };
+    const finalPayload = {
+      ...transformedValues,
+      plan: selectedPlan,
+      user_id: user?._id,
+      email: user?.email,
+      firstName: user?.firstName,
+      lastName: user?.lastName,
+      wallet_address: address,
+    };
     await intializeTransaction(finalPayload);
   };
 

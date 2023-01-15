@@ -12,7 +12,7 @@ interface KeyFeatureItemProps {
 const KeyFeatureItem: React.FC<KeyFeatureItemProps> = ({ item }) => {
   return (
     <div className="relative bigLaptop:mr-[33px] bigLaptop:even:mt-40 w-[320px] h-[401px] smallLaptop:w-[380px] smallLaptop:h-[501px] bigLaptop:w-[457px] bigLaptop:h-[601px] mb-8">
-      <Image alt="" fill src={item.imageUrl} />
+      <Image alt="" layout="fill" src={item.imageUrl} />
       <Icon className="left-[48px] top-[39px] absolute" name="desktop" />
       <div className="absolute bottom-10 text-white pl-4 bigLaptop:pl-[48px] bigLaptop:w-[457px] bg-gradient-keyFeature">
         <p className="font-semibold text-[30px] whitespace-pre-line">{item.name}</p>

@@ -7,6 +7,8 @@ import useAuth from "@hooks/useAuth";
 
 import { ButtonProperties, changeDateFormat } from "@shared/libs/helpers";
 
+import RenderMembershipStatus from "../RenderMembershipStatus/RenderTransactionStatus";
+
 const MembershipPlan = () => {
   const { user, loading } = useAuth();
   return (
@@ -22,12 +24,10 @@ const MembershipPlan = () => {
             <div className="border border-obiBlue-300 px-[28px] pt-[29px] w-[311px] television:w-[411px]">
               <div className="flex items-center justify-between">
                 <p className="text-12 smallLaptop:text-14 text-obiGray-320 capitalize">{user?.current_subscription?.plan?.interval}</p>
-                <div className="flex justify-center items-center text-obiGreen-400 rounded-[5px] bg-green-100 text-8 smallLaptop:text-10 capitalize w-[67px] h-[31px] font-semibold">
-                  {user?.current_subscription?.status}
-                </div>
+                <RenderMembershipStatus status={user?.current_subscription?.status} />
               </div>
               <h3 className="font-medium text-24 smallLaptop:text-[32px] mt-6 mb-[28px] text-obiBlack-300">
-                {user?.current_subscription?.currency} {Number(user?.current_subscription?.amount).toLocaleString()}{" "}
+                {user?.current_subscription?.currency} {Number(user?.current_subscription?.amount || 0).toLocaleString()}{" "}
                 <span className="text-14 text-obiGray-320 ml-2 capitalize">{user?.current_subscription?.plan?.interval}</span>
               </h3>
               <h4 className="text-16 smallLaptop:text-18 mb-6">Labour Party Membership Subscription</h4>

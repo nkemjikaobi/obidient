@@ -6,12 +6,18 @@ import { showToast } from "src/helpers/showToast";
 
 import MembershipForm2 from "@components/organisms/MembershipPage/MembershipForm2/MembershipForm2";
 
+import useAlert from "@hooks/useAlert";
 import useAuth from "@hooks/useAuth";
+import useWallet from "@hooks/useWallet";
 
-import { NotificationTypes, setAuthToken } from "@shared/libs/helpers";
+import { setAuthToken } from "@shared/libs/helpers";
+
+import { IAlert } from "@pages/dashboard";
 
 const MembershipFormPage: NextPage = () => {
   const { loadUser } = useAuth();
+  const { alerts } = useAlert();
+  const { monitorAccountChanged, monitorDisconnect, provider, connectWallet } = useWallet();
 
   useEffect(() => {
     if (typeof window !== "undefined" && localStorage.token) {
@@ -23,21 +29,45 @@ const MembershipFormPage: NextPage = () => {
     loadUser();
   }, []);
 
-  const { error, clearErrors, message, clearMessages } = useAuth();
-
+  // Handle Notifications
   useEffect(() => {
-    if (error) {
-      showToast(error, NotificationTypes.ERROR);
-      clearErrors();
-    }
-  }, [error]);
+    let mounted = true;
 
-  useEffect(() => {
-    if (message) {
-      showToast(message, NotificationTypes.SUCCESS);
-      clearMessages();
+    if (mounted && alerts.length > 0) {
+      alerts.map((alert: IAlert) => showToast(alert.message, alert.type));
     }
-  }, [message]);
+    return () => {
+      mounted = false;
+    };
+    // eslint-disable-next-line
+  }, [alerts]);
+
+  // monitior account changed and monitor disconnect
+  useEffect(() => {
+    let mounted = true;
+
+    if (mounted && provider !== null) {
+      monitorAccountChanged(provider);
+      monitorDisconnect(provider);
+    }
+    return () => {
+      mounted = false;
+    };
+    // eslint-disable-next-line
+  }, [provider]);
+
+  // Reconnect wallet on page refresh
+  useEffect(() => {
+    let mounted = true;
+
+    if (mounted && localStorage?.getItem("isWalletConnected") === "true") {
+      connectWallet();
+    }
+    return () => {
+      mounted = false;
+    };
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <div>

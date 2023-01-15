@@ -6,14 +6,18 @@ import { showToast } from "src/helpers/showToast";
 
 import BasePageLayout from "@components/layouts/BasePageLayout/BasePageLayout";
 
-import useAuth from "@hooks/useAuth";
+import useAlert from "@hooks/useAlert";
+import useWallet from "@hooks/useWallet";
 
 import { NotificationTypes } from "@shared/libs/helpers";
+
+import { IAlert } from "@pages/dashboard";
 
 import { LoginPage } from "@modules/authPages";
 
 const Login: NextPage = () => {
-  const { error, clearErrors, message, clearMessages } = useAuth();
+  const { alerts } = useAlert();
+  const { monitorAccountChanged, monitorDisconnect, provider, connectWallet } = useWallet();
 
   const router = useRouter();
 
@@ -37,19 +41,46 @@ const Login: NextPage = () => {
     }
   }, [email, token]);
 
+  // Handle Notifications
   useEffect(() => {
-    if (error) {
-      showToast(error, NotificationTypes.ERROR);
-      clearErrors();
-    }
-  }, [error]);
+    let mounted = true;
 
-  useEffect(() => {
-    if (message) {
-      showToast(message, NotificationTypes.SUCCESS);
-      clearMessages();
+    if (mounted && alerts.length > 0) {
+      alerts.map((alert: IAlert) => showToast(alert.message, alert.type));
     }
-  }, [message]);
+    return () => {
+      mounted = false;
+    };
+    // eslint-disable-next-line
+  }, [alerts]);
+
+  // monitior account changed and monitor disconnect
+  useEffect(() => {
+    let mounted = true;
+
+    if (mounted && provider !== null) {
+      monitorAccountChanged(provider);
+      monitorDisconnect(provider);
+    }
+    return () => {
+      mounted = false;
+    };
+    // eslint-disable-next-line
+  }, [provider]);
+
+  // Reconnect wallet on page refresh
+  useEffect(() => {
+    let mounted = true;
+
+    if (mounted && localStorage?.getItem("isWalletConnected") === "true") {
+      connectWallet();
+    }
+    return () => {
+      mounted = false;
+    };
+    // eslint-disable-next-line
+  }, []);
+
   return (
     <BasePageLayout showDesktopNavigation={false} showFooter={false} showMobileNavigation={true} showNavigation={true} title="Obidient Login">
       <LoginPage />

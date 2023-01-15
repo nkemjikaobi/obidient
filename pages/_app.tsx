@@ -6,7 +6,9 @@ import "nprogress/nprogress.css";
 import "../styles/globals.css";
 import { Toaster } from "react-hot-toast";
 
+import AlertState from "@context/alert/AlertState";
 import AuthState from "@context/auth/AuthState";
+import WalletState from "@context/wallet/WalletState";
 
 /**
  * App wrapper for the whole application
@@ -25,10 +27,14 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   Router.events.on("routeChangeError", () => NProgress.done());
 
   return (
-    <AuthState>
-      <Toaster position="bottom-left" />
-      <Component {...pageProps} />
-    </AuthState>
+    <WalletState>
+      <AlertState>
+        <AuthState>
+          <Toaster position="bottom-left" />
+          <Component {...pageProps} />
+        </AuthState>
+      </AlertState>
+    </WalletState>
   );
 };
 

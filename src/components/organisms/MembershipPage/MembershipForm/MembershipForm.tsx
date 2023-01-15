@@ -15,6 +15,7 @@ import Icon from "@components/atoms/Icons";
 
 import useAuth from "@hooks/useAuth";
 import useFileUpload from "@hooks/useFileUpload";
+import useWallet from "@hooks/useWallet";
 
 import { ButtonProperties, NotificationTypes, errorMessages, subtractYears } from "@shared/libs/helpers";
 
@@ -35,6 +36,7 @@ const MembershipForm = () => {
   const router = useRouter();
 
   const [{ data: fileUploadData, loading: fileUploadLoading }, uploadImage] = useFileUpload();
+  const { address } = useWallet();
 
   useEffect(() => {
     if (fileUploadData) {
@@ -103,7 +105,10 @@ const MembershipForm = () => {
   });
 
   const registerMember = async (values: Values) => {
-    const transformedValues = { ...values, user_id: user._id, age: departureDate, kycImageUrl: kycData?.url, kycPublicId: kycData?.public_id };
+    if (!address) {
+      return showToast("Connect Wallet", NotificationTypes.ERROR);
+    }
+    const transformedValues = { ...values, user_id: user._id, age: departureDate, kycImageUrl: kycData?.url, kycPublicId: kycData?.public_id, wallet_address: address };
     await membershipRegistration(transformedValues, router);
   };
 
