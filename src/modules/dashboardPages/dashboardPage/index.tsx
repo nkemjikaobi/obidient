@@ -29,9 +29,10 @@ export const DashBoard: FC = () => {
       <TopBar />
       <div className="flex flex-col bigLaptop:flex-row mt-12">
         <div className="">
-          <div className="flex flex-col bigLaptop:flex-row items-center bigLaptop:space-x-12 mb-8">
+          <div className="flex flex-col smallLaptop:flex-row smallLaptop:items-center smallLaptop:space-x-12 mb-8 pr-6 tablet:px-8 smallLaptop:px-0">
             <MembershipPlan />
-            <div className="hidden bigLaptop:block">
+            {/* <div className="hidden smallLaptop:block"> */}
+            <div className="">
               <MembershipCard />
             </div>
           </div>
