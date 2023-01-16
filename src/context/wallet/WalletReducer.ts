@@ -1,4 +1,4 @@
-import { CONNECT_WALLET, DISCONNECT_WALLET, MONITOR_ACCOUNT_CHANGED, MONITOR_DISCONNECT } from "../types";
+import { CONNECT_WALLET, DISCONNECT_WALLET, GET_TOKEN_DETAILS, LOAD_CONTRACT, MONITOR_ACCOUNT_CHANGED, MONITOR_DISCONNECT } from "../types";
 
 const WalletReducer = (state: any, action: any) => {
   switch (action.type) {
@@ -12,6 +12,11 @@ const WalletReducer = (state: any, action: any) => {
         web3Modal: action.payload.web3Modal,
         providerOptions: action.payload.providerOptions,
         provider: action.payload.provider,
+      };
+    case LOAD_CONTRACT:
+      return {
+        ...state,
+        nftContract: action.payload.nftContract,
       };
     case DISCONNECT_WALLET:
       return {
@@ -37,6 +42,11 @@ const WalletReducer = (state: any, action: any) => {
         address: null,
         isConnected: false,
         balance: "",
+      };
+    case GET_TOKEN_DETAILS:
+      return {
+        ...state,
+        tokenUri: action.payload,
       };
     default:
       return state;

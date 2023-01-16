@@ -132,6 +132,8 @@ const AuthState = (props: any) => {
 
       const connectionStatus = await connectWallet();
 
+      // const contract = await loadContract(web3);
+
       if (connectionStatus) {
         if (!res.data.data.user.membershipRegistration) {
           router.push("/auth/membership-form");
@@ -139,7 +141,10 @@ const AuthState = (props: any) => {
           router.push("/auth/membership-form-payment");
         } else {
           router.push("/dashboard");
+          // await getTokenDetails(contract, address);
         }
+      } else {
+        setAlert("Connect a Polygon based wallet", NotificationTypes.ERROR);
       }
     } catch (err: any) {
       dispatch({

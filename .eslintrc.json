@@ -22,6 +22,7 @@
         "newlinesBetween": "always",
         "groups": [
           "module",
+          "/^@artifacts/",
           "/^@components/",
           "/^@context/",
           "/^@hooks/",

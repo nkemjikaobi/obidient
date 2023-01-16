@@ -9,6 +9,8 @@ const useWallet = () => {
     disconnectWallet,
     monitorAccountChanged,
     monitorDisconnect,
+    loadContract,
+    getTokenDetails,
 
     // state variables
     address,
@@ -19,6 +21,8 @@ const useWallet = () => {
     symbol,
     providerOptions,
     web3Modal,
+    nftContract,
+    tokenUri,
   } = useContext(WalletContext);
 
   return {
@@ -27,6 +31,8 @@ const useWallet = () => {
     disconnectWallet,
     monitorAccountChanged,
     monitorDisconnect,
+    loadContract,
+    getTokenDetails,
 
     // state variables
     address,
@@ -37,6 +43,8 @@ const useWallet = () => {
     symbol,
     providerOptions,
     web3Modal,
+    nftContract,
+    tokenUri,
   };
 };
 

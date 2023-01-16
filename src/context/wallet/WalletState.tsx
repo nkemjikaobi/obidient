@@ -3,11 +3,13 @@ import React, { useReducer } from "react";
 import Web3 from "web3";
 import Web3Modal from "web3modal";
 
+import NFTJson from "@artifacts/NFT.json";
+
 import useAlert from "@hooks/useAlert";
 
 import { NotificationTypes, convertToEther } from "@shared/libs/helpers";
 
-import { CONNECT_WALLET, DISCONNECT_WALLET, MONITOR_ACCOUNT_CHANGED, MONITOR_DISCONNECT } from "../types";
+import { CONNECT_WALLET, DISCONNECT_WALLET, GET_TOKEN_DETAILS, LOAD_CONTRACT, MONITOR_ACCOUNT_CHANGED, MONITOR_DISCONNECT } from "../types";
 import WalletContext from "./WalletContext";
 import WalletReducer from "./WalletReducer";
 
@@ -21,6 +23,8 @@ const WalletState = (props: any) => {
     symbol: "",
     providerOptions: null,
     web3Modal: null,
+    nftContract: null,
+    tokenUri: "",
   };
 
   const [state, dispatch] = useReducer(WalletReducer, initialState);
@@ -89,6 +93,40 @@ const WalletState = (props: any) => {
     }
   };
 
+  const getTokenDetails = async (contract: any, address: any) => {
+    try {
+      const tokenId = await contract.methods.tokenOwned(address).call();
+      if (tokenId.toString() !== "0") {
+        const res = await contract.methods.tokenURI(tokenId).call();
+
+        dispatch({
+          type: GET_TOKEN_DETAILS,
+          payload: res,
+        });
+      }
+    } catch (error) {
+      setAlert((error as Error).message, NotificationTypes.ERROR);
+    }
+  };
+
+  // Load Contract
+  const loadContract = async (web3: any) => {
+    try {
+      const nftContract = new web3.eth.Contract(NFTJson, `${process.env.NEXT_PUBLIC_NFT_CONTRACT_ADDRESS}`);
+
+      dispatch({
+        type: LOAD_CONTRACT,
+        payload: {
+          nftContract,
+        },
+      });
+
+      return nftContract;
+    } catch (error) {
+      setAlert((error as Error).message, NotificationTypes.ERROR);
+    }
+  };
+
   // Disconnect wallet
   const disconnectWallet = async (modal: any, router: any) => {
     modal.clearCachedProvider();
@@ -135,10 +173,14 @@ const WalletState = (props: any) => {
         symbol: state.symbol,
         providerOptions: state.providerOptions,
         web3Modal: state.web3Modal,
+        nftContract: state.nftContract,
+        tokenUri: state.tokenUri,
         connectWallet,
         disconnectWallet,
         monitorAccountChanged,
         monitorDisconnect,
+        loadContract,
+        getTokenDetails,
       }}
     >
       {props.children}
