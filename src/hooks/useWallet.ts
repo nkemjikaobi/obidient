@@ -23,6 +23,7 @@ const useWallet = () => {
     web3Modal,
     nftContract,
     tokenUri,
+    nftMetaData,
   } = useContext(WalletContext);
 
   return {
@@ -45,6 +46,7 @@ const useWallet = () => {
     web3Modal,
     nftContract,
     tokenUri,
+    nftMetaData,
   };
 };
 

@@ -67,7 +67,7 @@ export const DashboardNav = [
     route: "#",
   },
   {
-    id: 3,
+    id: 5,
     name: "Recent Activities",
     route: "#",
   },

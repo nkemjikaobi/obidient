@@ -25,6 +25,7 @@ const WalletState = (props: any) => {
     web3Modal: null,
     nftContract: null,
     tokenUri: "",
+    nftMetaData: null,
   };
 
   const [state, dispatch] = useReducer(WalletReducer, initialState);
@@ -99,9 +100,11 @@ const WalletState = (props: any) => {
       if (tokenId.toString() !== "0") {
         const res = await contract.methods.tokenURI(tokenId).call();
 
+        const metaData = await fetch(`${process.env.NEXT_PUBLIC_IPFS_BASE_URL}/${res}`).then((data) => data.json());
+
         dispatch({
           type: GET_TOKEN_DETAILS,
-          payload: res,
+          payload: { res, metaData },
         });
       }
     } catch (error) {
@@ -175,6 +178,7 @@ const WalletState = (props: any) => {
         web3Modal: state.web3Modal,
         nftContract: state.nftContract,
         tokenUri: state.tokenUri,
+        nftMetaData: state.nftMetaData,
         connectWallet,
         disconnectWallet,
         monitorAccountChanged,

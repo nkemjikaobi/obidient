@@ -27,14 +27,14 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   Router.events.on("routeChangeError", () => NProgress.done());
 
   return (
-    <WalletState>
-      <AlertState>
+    <AlertState>
+      <WalletState>
         <AuthState>
           <Toaster position="bottom-left" />
           <Component {...pageProps} />
         </AuthState>
-      </AlertState>
-    </WalletState>
+      </WalletState>
+    </AlertState>
   );
 };
 

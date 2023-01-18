@@ -46,7 +46,8 @@ const WalletReducer = (state: any, action: any) => {
     case GET_TOKEN_DETAILS:
       return {
         ...state,
-        tokenUri: action.payload,
+        tokenUri: action.payload.res,
+        nftMetaData: action.payload.metaData,
       };
     default:
       return state;

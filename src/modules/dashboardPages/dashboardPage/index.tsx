@@ -8,11 +8,13 @@ import WalletBalance from "@components/organisms/DashBoardPage/WalletBalance/Wal
 import WalletTransactions from "@components/organisms/DashBoardPage/WalletTransactions/WalletTransactions";
 
 import useAuth from "@hooks/useAuth";
+import useWallet from "@hooks/useWallet";
 
 import { setAuthToken } from "@shared/libs/helpers";
 
 export const DashBoard: FC = () => {
   const { loadUser } = useAuth();
+  const { getTokenDetails, nftContract, address, web3, loadContract } = useWallet();
 
   useEffect(() => {
     if (typeof window !== "undefined" && localStorage.token) {
@@ -23,6 +25,18 @@ export const DashBoard: FC = () => {
   useEffect(() => {
     loadUser();
   }, []);
+
+  useEffect(() => {
+    if (web3) {
+      loadContract(web3);
+    }
+  }, [web3]);
+
+  useEffect(() => {
+    if (nftContract && address) {
+      getTokenDetails(nftContract, address);
+    }
+  }, [nftContract, address]);
 
   return (
     <div className="pl-4 bigLaptop:pl-[48px]">

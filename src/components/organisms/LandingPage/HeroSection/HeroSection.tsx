@@ -36,7 +36,7 @@ const HeroSection = () => {
         </div>
       </div>
       <div className="hidden bigLaptop:block">
-        <Image alt="Ipad showing income" height={233} src={Hero} width={717} />
+        <Image alt="Ipad showing income" height={533} src={Hero} width={717} />
       </div>
       <div className="hidden smallLaptop:block bigLaptop:hidden">
         <Image alt="Ipad showing income" height={133} src={Hero} width={517} />

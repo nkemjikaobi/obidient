@@ -16,7 +16,7 @@ import { IAlert } from "@pages/dashboard";
 const MembershipFormPage: NextPage = () => {
   const { loadUser } = useAuth();
   const { alerts } = useAlert();
-  const { monitorAccountChanged, monitorDisconnect, provider, connectWallet } = useWallet();
+  const { monitorAccountChanged, monitorDisconnect, provider, connectWallet, address } = useWallet();
 
   useEffect(() => {
     if (typeof window !== "undefined" && localStorage.token) {
@@ -59,14 +59,14 @@ const MembershipFormPage: NextPage = () => {
   useEffect(() => {
     let mounted = true;
 
-    if (mounted && localStorage?.getItem("isWalletConnected") === "true") {
+    if ((mounted && localStorage?.getItem("isWalletConnected") === "true") || !address) {
       connectWallet();
     }
     return () => {
       mounted = false;
     };
     // eslint-disable-next-line
-  }, []);
+  }, [address]);
 
   return (
     <div>
