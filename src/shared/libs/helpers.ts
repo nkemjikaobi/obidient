@@ -173,3 +173,8 @@ export const shortenWalletAddress = (address: string) => {
     return finalOuput;
   }
 };
+
+export const executeScroll = (identifierOfTargetSection: string) => {
+  const section: any = document.querySelector(`#${identifierOfTargetSection}`);
+  section.scrollIntoView({ behavior: "smooth", block: "start" });
+};

@@ -5,10 +5,11 @@ import CustomButton from "@components/atoms/CustomButton/CustomButton";
 import CustomLink from "@components/atoms/CustomLink/CustomLink";
 import Logo from "@components/atoms/Logo/Logo";
 
-import { ButtonProperties } from "@shared/libs/helpers";
+import { ButtonProperties, executeScroll } from "@shared/libs/helpers";
 
 const DesktopNavigation = () => {
   const router = useRouter();
+
   return (
     <div className="flex justify-between items-center h-24 -ml-[50vw] left-[50%] relative w-screen px-16 bigLaptop:px-20 television:pl-64 television:pr-40 bg-white py-[106px]">
       <CustomLink destination="/">
@@ -16,10 +17,8 @@ const DesktopNavigation = () => {
       </CustomLink>
       <ul className="flex items-center justify-center">
         {DesktopNav.map((data) => (
-          <li className={`ml-4 mr-[47px] text-16 font-medium whitespace-nowrap`} key={data.id}>
-            <CustomLink customClass="hover:text-obiRed-500" destination={data.route}>
-              {data.name}
-            </CustomLink>
+          <li className={`ml-4 mr-[47px] text-16 font-medium whitespace-nowrap`} key={data.id} onClick={() => executeScroll(data.identifier)}>
+            <div className="hover:text-obiRed-500 cursor-pointer">{data.name}</div>
           </li>
         ))}
         <>
@@ -54,20 +53,24 @@ export const DesktopNav = [
     id: 1,
     name: "How it Works",
     route: "#",
+    identifier: "how-it-works",
   },
   {
     id: 2,
     name: "Features",
     route: "#",
+    identifier: "features",
   },
   {
     id: 3,
     name: "Token",
     route: "#",
+    identifier: "token",
   },
   {
     id: 4,
     name: "Blog",
     route: "#",
+    identifier: "blog",
   },
 ];

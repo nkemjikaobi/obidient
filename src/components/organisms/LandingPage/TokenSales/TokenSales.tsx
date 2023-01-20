@@ -5,7 +5,7 @@ import CustomLink from "@components/atoms/CustomLink/CustomLink";
 
 const TokenSales = () => {
   return (
-    <div className="pt-[100px] pb-[60px] px-6 smallLaptop:px-24">
+    <div className="pt-[100px] pb-[60px] px-6 smallLaptop:px-24" id="token">
       <h3 className="text-center text-40 mb-6 smallLaptop:mb-[114px] whitespace-nowrap">Token Sales</h3>
       <div className="flex flex-col smallLaptop:flex-row">
         <Image alt="phone" height={750} src="/images/png/phone.png" width={390} />
