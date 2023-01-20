@@ -71,7 +71,7 @@ const AuthState = (props: any) => {
           payload: res.data.data,
         });
       } catch (err: any) {
-        setAlert(err.response.data.message, NotificationTypes.ERROR);
+        // setAlert(err.response.data.message, NotificationTypes.ERROR);
       }
     };
     setTimeout(() => {
