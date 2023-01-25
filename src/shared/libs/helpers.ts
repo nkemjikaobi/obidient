@@ -113,6 +113,11 @@ export const NotificationTypes = {
   ERROR: "error",
 };
 
+export const UserTypes = {
+  CUSTOMER: "customer",
+  ADMIN: "admin",
+};
+
 export const setAuthToken = (token: string) => {
   if (token) {
     axios.defaults.headers.common["authorization"] = `Bearer ${token}`;

@@ -16,6 +16,8 @@ import {
   INITIALIZE_TRANSACTION_FAILURE,
   GET_TRANSACTIONS_SUCCESS,
   GET_TRANSACTIONS_ERROR,
+  GET_ALL_USERS_SUCCESS,
+  GET_ALL_USERS_FAILURE,
 } from "../types";
 
 const AuthReducer = (state: any, action: any) => {
@@ -109,6 +111,18 @@ const AuthReducer = (state: any, action: any) => {
         loading: false,
       };
     case GET_MEMBERSHIP_PLANS_ERROR:
+      return {
+        ...state,
+        error: action.payload,
+        loading: false,
+      };
+    case GET_ALL_USERS_SUCCESS:
+      return {
+        ...state,
+        allUsers: action.payload,
+        loading: false,
+      };
+    case GET_ALL_USERS_FAILURE:
       return {
         ...state,
         error: action.payload,

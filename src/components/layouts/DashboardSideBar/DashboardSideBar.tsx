@@ -20,7 +20,7 @@ const DashboardSideBar = () => {
 
   return (
     <div className="bg-white h-full w-[120px] pt-[62px] pl-[42px] pr-[46px] min-h-[1117px]">
-      <CustomLink destination="/">
+      <CustomLink destination="/dashboard">
         <Icon className="mb-[85px]" name="obiSign" />
       </CustomLink>
       <ul className="space-y-[5.5rem] text-14 font-medium">

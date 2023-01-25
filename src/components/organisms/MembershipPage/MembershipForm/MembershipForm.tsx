@@ -70,6 +70,7 @@ const MembershipForm = () => {
     ward: user?.ward,
     pollingUnit: user?.pollingUnit,
     kycType: user?.kycType || "nin",
+    kycNumber: "",
   };
 
   interface Values {
@@ -86,6 +87,7 @@ const MembershipForm = () => {
     ward: string;
     pollingUnit: string;
     kycType: string;
+    kycNumber: string;
   }
 
   const RegisterSchema = Yup.object().shape({
@@ -102,13 +104,18 @@ const MembershipForm = () => {
     lastName: Yup.string().min(2, "Too Short!").max(50, "Too Long!").required(errorMessages.required),
     pollingUnit: Yup.string().min(2, "Too Short!").max(50, "Too Long!").required(errorMessages.required),
     kycType: Yup.string().min(2, "Too Short!").max(50, "Too Long!").required(errorMessages.required),
+    kycNumber: Yup.string().min(2, "Too Short!").max(50, "Too Long!").required(errorMessages.required),
   });
 
   const registerMember = async (values: Values) => {
     if (!address) {
       return showToast("Connect Wallet", NotificationTypes.ERROR);
     }
-    const transformedValues = { ...values, user_id: user._id, age: departureDate, kycImageUrl: kycData?.url, kycPublicId: kycData?.public_id, wallet_address: address };
+
+    if (!kycData) {
+      return showToast("Upload Profile Picture", NotificationTypes.ERROR);
+    }
+    const transformedValues = { ...values, user_id: user._id, age: departureDate, profileImageUrl: kycData?.url, kycPublicId: kycData?.public_id, wallet_address: address };
     await membershipRegistration(transformedValues, router);
   };
 
@@ -363,9 +370,20 @@ const MembershipForm = () => {
                       parentContainer="!border-obiGray-320"
                     />
                   </div>
+                  <div className="w-full mt-8">
+                    <CustomLabel className="mb-[0.438rem] text-14 text-obiGray-320" title="Enter identity number for kyc" />
+                    <FormikCustomInput
+                      className="border border-glass-450 rounded-[0.313rem] h-[3.75rem] mr-4 mt-2 "
+                      container="tablet:px-6"
+                      inputClassName="placeholder:text-sm border-black"
+                      name="kycNumber"
+                      placeholder="98726281834"
+                      type="text"
+                    />
+                  </div>
                 </div>
                 <div className="mt-8">
-                  <CustomLabel className="mb-[0.438rem] text-14 text-obiGray-320" title="Upload kyc document" />
+                  <CustomLabel className="mb-[0.438rem] text-14 text-obiGray-320" title="Upload Profile Picture" />
                   <div className="cursor-pointer relative mt-4" {...getRootProps()}>
                     <input {...getInputProps()} />
                     <CustomInput

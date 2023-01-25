@@ -13,9 +13,7 @@ const RenderMembershipStatus = ({ status }: RenderMembershipStatusProps) => {
           {status}{" "}
         </div>
       ) : (
-        <div className="flex justify-center items-center text-obiGreen-400 rounded-[5px] bg-green-100 text-8 smallLaptop:text-10 capitalize w-[67px] h-[31px] font-semibold">
-          {status}
-        </div>
+        <div className="flex justify-center items-center text-red-400 rounded-[5px] bg-red-100 text-8 smallLaptop:text-10 capitalize w-[67px] h-[31px] font-semibold">{status}</div>
       )}
     </>
   );

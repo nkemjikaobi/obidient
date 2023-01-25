@@ -101,6 +101,7 @@ const WalletState = (props: any) => {
         const res = await contract.methods.tokenURI(tokenId).call();
 
         const metaData = await fetch(`${process.env.NEXT_PUBLIC_IPFS_BASE_URL}/${res}`).then((data) => data.json());
+        console.log({ metaData });
 
         dispatch({
           type: GET_TOKEN_DETAILS,

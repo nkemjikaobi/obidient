@@ -28,6 +28,8 @@ import {
   GET_MEMBERSHIP_PLANS_ERROR,
   GET_TRANSACTIONS_ERROR,
   INITIALIZE_TRANSACTION_FAILURE,
+  GET_ALL_USERS_FAILURE,
+  GET_ALL_USERS_SUCCESS,
 } from "../types";
 import AuthContext from "./AuthContext";
 import AuthReducer from "./AuthReducer";
@@ -43,6 +45,7 @@ const AuthState = (props: any) => {
     membershipPlans: [],
     transaction: null,
     allTransactions: [],
+    allUsers: [],
   };
 
   const [state, dispatch] = useReducer(AuthReducer, initialState);
@@ -225,6 +228,25 @@ const AuthState = (props: any) => {
     }
   };
 
+  // Get All Users
+  const getAllUsers = async () => {
+    setLoading(true);
+
+    try {
+      const res = await customAxios.get("/admin/users");
+
+      dispatch({
+        type: GET_ALL_USERS_SUCCESS,
+        payload: res.data.data,
+      });
+    } catch (err: any) {
+      dispatch({
+        type: GET_ALL_USERS_FAILURE,
+      });
+      setAlert(err.response.data.message, NotificationTypes.ERROR);
+    }
+  };
+
   // Get Transactions
   const getTransactions = async () => {
     setLoading(true);
@@ -291,6 +313,7 @@ const AuthState = (props: any) => {
         membershipPlans: state.membershipPlans,
         transaction: state.transaction,
         allTransactions: state.allTransactions,
+        allUsers: state.allUsers,
         register,
         clearErrors,
         loadUser,
@@ -302,6 +325,7 @@ const AuthState = (props: any) => {
         getMembershipPlans,
         intializeTransaction,
         getTransactions,
+        getAllUsers,
       }}
     >
       {props.children}
