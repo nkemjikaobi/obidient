@@ -34,6 +34,7 @@ const MobileFooter = () => {
           <FooterOptions hasIcons={true} options={FollowUs} title="Follow us" />
           <hr />
           <p className="text-center text-obiGray-300 pt-6 text-14">Obedient Token © 2022 All Right Reserved</p>
+          <p className="text-center my-4 text-obiGray-300">Powered by Africa BIoT Labs</p>
         </div>
       </div>
     </>

@@ -34,6 +34,7 @@ const DesktopFooter = () => {
       <div className="bg-black text-white p-10 text-14 font-medium relative h-[164px]">
         <div className={`flex justify-between items-center pb-16 opacity-95 max-w-[90rem] mx-auto relative text-obiGray-320`}>
           <p>Obedient Token © 2022 All Right Reserved</p>
+          <p>Powered by Africa BIoT Labs</p>
           <div className="flex items-center">
             <CustomLink customClass="mr-[24px]" destination="#">
               Terms of Service
