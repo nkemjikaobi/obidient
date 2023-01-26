@@ -63,6 +63,7 @@ const MembershipForm2 = () => {
       firstName: user?.firstName,
       lastName: user?.lastName,
       wallet_address: address,
+      profileImageUrl: user?.profileImageUrl,
     };
     await intializeTransaction(finalPayload);
   };

@@ -1,11 +1,9 @@
 import React from "react";
 import { ImSpinner9 } from "react-icons/im";
 
-import CustomButton from "@components/atoms/CustomButton/CustomButton";
-
 import useAuth from "@hooks/useAuth";
 
-import { ButtonProperties, changeDateFormat } from "@shared/libs/helpers";
+import { changeDateFormat } from "@shared/libs/helpers";
 
 import RenderMembershipStatus from "../RenderMembershipStatus/RenderTransactionStatus";
 
@@ -30,18 +28,18 @@ const MembershipPlan = () => {
                 {user?.current_subscription?.currency} {Number(user?.current_subscription?.amount || 0).toLocaleString()}{" "}
                 <span className="text-14 text-obiGray-320 ml-2 capitalize">{user?.current_subscription?.plan?.interval}</span>
               </h3>
-              <h4 className="text-16 smallLaptop:text-18 mb-6">Labour Party Membership Subscription</h4>
+              <h4 className="text-16 smallLaptop:text-18 mb-6">Obidient Movement Membership Subscription</h4>
               <p className="text-12 smallLaptop:text-14 text-obiGray-320 mt-[33px] mb-[36px]">
                 Expires on the {changeDateFormat(user?.current_subscription?.expiry_date, "DD MMM YYYY - LT")}
               </p>
             </div>
-            <CustomButton
+            {/* <CustomButton
               customClass="!rounded-[5px] !border-obiGray-100 !text-obiGray-350 !bg-obiGray-100 hover:!bg-obiGray-250 my-4 bigLaptop:!my-6 !w-full"
               handleClick={() => {}}
               size={ButtonProperties.SIZES.small}
               title="Change Plan"
               variant={ButtonProperties.VARIANT.primary.name}
-            />
+            /> */}
           </>
         )}
       </div>
