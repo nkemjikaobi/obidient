@@ -1,4 +1,5 @@
-import React, { FC, useEffect } from "react";
+import React, { FC, useEffect, useRef } from "react";
+import { useReactToPrint } from "react-to-print";
 
 import MembershipCard from "@components/organisms/DashBoardPage/MembershipCard/MembershipCard";
 import MembershipPlan from "@components/organisms/DashBoardPage/MembershipPlan/MembershipPlan";
@@ -15,6 +16,11 @@ import { setAuthToken } from "@shared/libs/helpers";
 export const DashBoard: FC = () => {
   const { loadUser } = useAuth();
   const { getTokenDetails, nftContract, address, web3, loadContract } = useWallet();
+  const componentRef: any = useRef();
+
+  const handlePrint = useReactToPrint({
+    content: () => componentRef.current,
+  });
 
   useEffect(() => {
     if (typeof window !== "undefined" && localStorage.token) {
@@ -47,7 +53,9 @@ export const DashBoard: FC = () => {
             <MembershipPlan />
             {/* <div className="hidden smallLaptop:block"> */}
             <div className="">
-              <MembershipCard />
+              <MembershipCard handlePrint={handlePrint} ref={componentRef} />
+              {/* <ReactToPrint content={() => componentRef.current} trigger={() => <button>Print this out!</button>} /> */}
+              {/* <button onClick={handlePrint}>Print this out!</button> */}
             </div>
           </div>
           <div className="hidden bigLaptop:block">

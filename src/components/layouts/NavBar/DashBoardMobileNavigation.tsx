@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { GiHamburgerMenu } from "react-icons/gi";
@@ -6,14 +7,25 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import CustomLink from "@components/atoms/CustomLink/CustomLink";
 import Logo from "@components/atoms/Logo/Logo";
 
+import useAuth from "@hooks/useAuth";
 import useClickOutside from "@hooks/useClickOutside";
+import useWallet from "@hooks/useWallet";
 
 const DashboardMobileNavigation = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const router = useRouter();
+  const { logout } = useAuth();
+  const { disconnectWallet, web3Modal } = useWallet();
 
   const node = useClickOutside(() => {
     setIsOpen(false);
   });
+
+  const onLogOut = () => {
+    logout();
+    disconnectWallet(web3Modal, router);
+    router.push("/auth/login");
+  };
 
   return (
     <>
@@ -35,7 +47,7 @@ const DashboardMobileNavigation = () => {
             </div>
           </Link>
         ))}
-        <div className="capitalize mr-12 mb-4 cursor-pointer text-citiGray-500 hover:text-citiGreen-600 text-sm">
+        <div className="capitalize mr-12 mb-4 cursor-pointer text-citiGray-500 hover:text-citiGreen-600 text-sm" onClick={() => onLogOut()}>
           <span>Logout</span>
         </div>
       </div>
