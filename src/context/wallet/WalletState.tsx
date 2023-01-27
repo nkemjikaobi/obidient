@@ -3,7 +3,8 @@ import React, { useReducer } from "react";
 import Web3 from "web3";
 import Web3Modal from "web3modal";
 
-import NFTJson from "@artifacts/NFT.json";
+import NFTJsonProd from "@artifacts/NFT-Prod.json";
+import NFTJsonStaging from "@artifacts/NFT-Staging.json";
 
 import useAlert from "@hooks/useAlert";
 
@@ -116,7 +117,12 @@ const WalletState = (props: any) => {
   // Load Contract
   const loadContract = async (web3: any) => {
     try {
-      const nftContract = new web3.eth.Contract(NFTJson, `${process.env.NEXT_PUBLIC_NFT_CONTRACT_ADDRESS}`);
+      let nftContract;
+      if (process.env.NEXT_PUBLIC_ENVIRONMENT === "staging") {
+        nftContract = new web3.eth.Contract(NFTJsonStaging, `${process.env.NEXT_PUBLIC_NFT_CONTRACT_ADDRESS}`);
+      } else {
+        nftContract = new web3.eth.Contract(NFTJsonProd, `${process.env.NEXT_PUBLIC_NFT_CONTRACT_ADDRESS}`);
+      }
 
       dispatch({
         type: LOAD_CONTRACT,
