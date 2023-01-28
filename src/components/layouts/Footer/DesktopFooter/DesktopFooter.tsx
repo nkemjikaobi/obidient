@@ -8,6 +8,9 @@ import { Socials } from "@components/componentData/Footer/Socials";
 import FooterOptions from "@components/FooterOptions.tsx/DesktopFooterOptions";
 
 const DesktopFooter = () => {
+  const handleClick = () => {
+    window.open("https://www.biotlabs.africa/", "_blank");
+  };
   return (
     <div>
       <div className="bg-black text-white relative">
@@ -34,7 +37,9 @@ const DesktopFooter = () => {
       <div className="bg-black text-white p-10 text-14 font-medium relative h-[164px]">
         <div className={`flex justify-between items-center pb-16 opacity-95 max-w-[90rem] mx-auto relative text-obiGray-320`}>
           <p>Obedient Token © 2022 All Right Reserved</p>
-          <p>Powered by Africa BIoT Labs</p>
+          <p className="cursor-pointer hover:text-red-500" onClick={() => handleClick()}>
+            Powered by Africa BIoT Labs
+          </p>
           <div className="flex items-center">
             <CustomLink customClass="mr-[24px]" destination="#">
               Terms of Service
