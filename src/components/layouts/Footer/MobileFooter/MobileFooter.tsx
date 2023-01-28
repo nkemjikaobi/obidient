@@ -5,6 +5,9 @@ import Logo from "@components/atoms/Logo/Logo";
 import FooterOptions from "@components/FooterOptions.tsx/DesktopFooterOptions";
 
 const MobileFooter = () => {
+  const handleClick = () => {
+    window.open("https://www.biotlabs.africa/", "_blank");
+  };
   const FollowUs = [
     {
       id: 1,
@@ -34,7 +37,9 @@ const MobileFooter = () => {
           <FooterOptions hasIcons={true} options={FollowUs} title="Follow us" />
           <hr />
           <p className="text-center text-obiGray-300 pt-6 text-14">Obedient Token © 2022 All Right Reserved</p>
-          <p className="text-center my-4 text-obiGray-300">Powered by Africa BIoT Labs</p>
+          <p className="cursor-pointer hover:text-red-500 text-center my-4" onClick={() => handleClick()}>
+            Powered by Africa BIoT Labs
+          </p>
         </div>
       </div>
     </>
