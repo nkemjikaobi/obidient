@@ -32,17 +32,18 @@ const MembershipForm2 = () => {
   }, []);
 
   const initialState = {
-    description: "",
+    referredBy: "",
     terms: false,
   };
 
   interface Values {
-    description: string;
+    referredBy: string;
     terms: boolean;
   }
 
   const RegisterSchema = Yup.object().shape({
     terms: Yup.boolean().oneOf([true], "Agree to terms and conditions"),
+    referredBy: Yup.string().email("Invalid email"),
   });
 
   const registerMember = async (values: Values) => {
@@ -54,7 +55,7 @@ const MembershipForm2 = () => {
       return showToast("Connect Wallet", NotificationTypes.ERROR);
     }
 
-    const transformedValues = pick(values, ["description"]);
+    const transformedValues = pick(values, ["referredBy"]);
     const finalPayload = {
       ...transformedValues,
       plan: selectedPlan,
@@ -136,14 +137,14 @@ const MembershipForm2 = () => {
                 <Form className="">
                   <div className="relative w-[30%]">
                     <div>
-                      <CustomLabel className="mb-[0.438rem] text-14 text-obiGray-320 whitespace-nowrap" title="Comment (optional)" />
+                      <CustomLabel className="mb-[0.438rem] text-14 text-obiGray-320 whitespace-nowrap" title="Referal Email" />
                       <FormikCustomInput
                         className="border border-glass-450 rounded-[0.313rem] h-[3.75rem] mr-4 mt-2 !w-[350px] smallLaptop:!w-full"
                         container="tablet:px-6"
                         inputClassName="placeholder:text-sm border-black"
-                        name="description"
-                        placeholder="Enter an additional comment"
-                        type="text"
+                        name="referredBy"
+                        placeholder="Enter the referal email"
+                        type="email"
                       />
                     </div>
                     <FormikCustomCheckbox
