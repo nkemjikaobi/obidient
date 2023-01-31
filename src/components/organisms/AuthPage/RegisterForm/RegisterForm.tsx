@@ -28,6 +28,7 @@ export interface RegisterFormDataProps {
 const RegisterForm = () => {
   const router = useRouter();
   const { register, loading } = useAuth();
+  const { ref } = router.query;
 
   const initialState = {
     firstName: "",
@@ -66,7 +67,15 @@ const RegisterForm = () => {
 
   const registerUser = async (values: Values) => {
     const transformedValues = pick(values, ["firstName", "lastName", "email", "phoneNumber", "password"]);
-    await register(transformedValues, router);
+    let finalResult;
+    if (ref) {
+      finalResult = { ...transformedValues, referralCode: ref };
+    } else {
+      finalResult = { ...transformedValues };
+    }
+
+    console.log(finalResult);
+    await register(finalResult, router);
   };
 
   return (

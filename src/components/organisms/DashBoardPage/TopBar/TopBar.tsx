@@ -26,14 +26,6 @@ const TopBar = () => {
             variant={ButtonProperties.VARIANT.primary.name}
           />
         )}
-        {/* <CustomInput
-          className="border border-glass-450 rounded-[0.313rem] mr-[35px] mt-2 h-[56px]"
-          icon="search"
-          inputClassName="placeholder:text-sm"
-          name="search"
-          placeholder="Search"
-          type="text"
-        /> */}
         <span className="mr-4 text-14 cursor-pointer hover:text-obiRed-500" onClick={() => connectWallet()}>
           Connect Wallet
         </span>
