@@ -25,8 +25,9 @@ const DashboardSideBar = () => {
       </CustomLink>
       <ul className="space-y-[5.5rem] text-14 font-medium">
         {DashboardSideBarData.map((data) => (
-          <li className="flex items-center space-x-4 cursor-pointer relative" key={data.id} onClick={() => router.push(data.route)}>
+          <li className="flex flex-col justify-center items-center space-x-4 cursor-pointer relative" key={data.id} onClick={() => router.push(data.route)}>
             <Icon name={data.icon} />
+            <p className="mt-2">{data.text}</p>
           </li>
         ))}
         <li className="flex items-center space-x-4 cursor-pointer">
@@ -45,11 +46,12 @@ const DashboardSideBarData = [
     icon: "grid",
     route: "/dashboard",
   },
-  // {
-  //   id: 2,
-  //   icon: "card",
-  //   route: "#",
-  // },
+  {
+    id: 2,
+    icon: "card",
+    route: "/dashboard/referrals",
+    text: "Referrals",
+  },
   // {
   //   id: 3,
   //   icon: "cash",

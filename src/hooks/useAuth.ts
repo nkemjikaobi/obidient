@@ -17,6 +17,7 @@ const useAuth = () => {
     intializeTransaction,
     getTransactions,
     getAllUsers,
+    getAllRefs,
 
     // state variables
     token,
@@ -29,6 +30,7 @@ const useAuth = () => {
     transaction,
     allTransactions,
     allUsers,
+    allRefs,
   } = useContext(AuthContext);
 
   return {
@@ -44,6 +46,7 @@ const useAuth = () => {
     intializeTransaction,
     getTransactions,
     getAllUsers,
+    getAllRefs,
 
     // state variables
     token,
@@ -56,6 +59,7 @@ const useAuth = () => {
     transaction,
     allTransactions,
     allUsers,
+    allRefs,
   };
 };
 

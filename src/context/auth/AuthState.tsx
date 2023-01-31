@@ -30,6 +30,8 @@ import {
   INITIALIZE_TRANSACTION_FAILURE,
   GET_ALL_USERS_FAILURE,
   GET_ALL_USERS_SUCCESS,
+  GET_ALL_REFS_SUCCESS,
+  GET_ALL_REFS_FAILURE,
 } from "../types";
 import AuthContext from "./AuthContext";
 import AuthReducer from "./AuthReducer";
@@ -46,6 +48,7 @@ const AuthState = (props: any) => {
     transaction: null,
     allTransactions: [],
     allUsers: [],
+    allRefs: [],
   };
 
   const [state, dispatch] = useReducer(AuthReducer, initialState);
@@ -247,6 +250,25 @@ const AuthState = (props: any) => {
     }
   };
 
+  // Get All Refs
+  const getAllRefs = async () => {
+    setLoading(true);
+
+    try {
+      const res = await customAxios.get("/user/referrals/me");
+
+      dispatch({
+        type: GET_ALL_REFS_SUCCESS,
+        payload: res.data.data,
+      });
+    } catch (err: any) {
+      dispatch({
+        type: GET_ALL_REFS_FAILURE,
+      });
+      setAlert(err.response.data.message, NotificationTypes.ERROR);
+    }
+  };
+
   // Get Transactions
   const getTransactions = async () => {
     setLoading(true);
@@ -314,6 +336,7 @@ const AuthState = (props: any) => {
         transaction: state.transaction,
         allTransactions: state.allTransactions,
         allUsers: state.allUsers,
+        allRefs: state.allRefs,
         register,
         clearErrors,
         loadUser,
@@ -326,6 +349,7 @@ const AuthState = (props: any) => {
         intializeTransaction,
         getTransactions,
         getAllUsers,
+        getAllRefs,
       }}
     >
       {props.children}
