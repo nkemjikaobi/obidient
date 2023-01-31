@@ -1,9 +1,11 @@
 import React from "react";
+import CopyToClipboard from "react-copy-to-clipboard";
 import { ImSpinner9 } from "react-icons/im";
+import { showToast } from "src/helpers/showToast";
 
 import useAuth from "@hooks/useAuth";
 
-import { changeDateFormat } from "@shared/libs/helpers";
+import { NotificationTypes, changeDateFormat } from "@shared/libs/helpers";
 
 import RenderMembershipStatus from "../RenderMembershipStatus/RenderTransactionStatus";
 
@@ -32,6 +34,15 @@ const MembershipPlan = () => {
               <p className="text-12 smallLaptop:text-14 text-obiGray-320 mt-[33px] mb-[36px]">
                 Expires on the {changeDateFormat(user?.current_subscription?.expiry_date, "DD MMM YYYY - LT")}
               </p>
+              <CopyToClipboard
+                onCopy={() => {
+                  console.log("here");
+                  showToast("Referral Link Copied", NotificationTypes.SUCCESS);
+                }}
+                text={`${process.env.NEXT_PUBLIC_FRONTEND_DOMAIN}/auth/create-account?ref=${user?.urlKey}`}
+              >
+                <p className="text-center text-[0.8rem] text-obiRed-500 cursor-pointer mb-4">{`${process.env.NEXT_PUBLIC_FRONTEND_DOMAIN}/auth/create-account?ref=${user?.urlKey}`}</p>
+              </CopyToClipboard>
             </div>
             {/* <CustomButton
               customClass="!rounded-[5px] !border-obiGray-100 !text-obiGray-350 !bg-obiGray-100 hover:!bg-obiGray-250 my-4 bigLaptop:!my-6 !w-full"

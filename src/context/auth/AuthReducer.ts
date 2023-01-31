@@ -18,6 +18,8 @@ import {
   GET_TRANSACTIONS_ERROR,
   GET_ALL_USERS_SUCCESS,
   GET_ALL_USERS_FAILURE,
+  GET_ALL_REFS_SUCCESS,
+  GET_ALL_REFS_FAILURE,
 } from "../types";
 
 const AuthReducer = (state: any, action: any) => {
@@ -123,6 +125,18 @@ const AuthReducer = (state: any, action: any) => {
         loading: false,
       };
     case GET_ALL_USERS_FAILURE:
+      return {
+        ...state,
+        error: action.payload,
+        loading: false,
+      };
+    case GET_ALL_REFS_SUCCESS:
+      return {
+        ...state,
+        allRefs: action.payload,
+        loading: false,
+      };
+    case GET_ALL_REFS_FAILURE:
       return {
         ...state,
         error: action.payload,
