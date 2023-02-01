@@ -32,7 +32,7 @@ const MembershipForm2 = () => {
   }, []);
 
   const initialState = {
-    referredBy: "",
+    referredBy: user?.referredBy || "",
     terms: false,
   };
 
@@ -141,6 +141,7 @@ const MembershipForm2 = () => {
                       <FormikCustomInput
                         className="border border-glass-450 rounded-[0.313rem] h-[3.75rem] mr-4 mt-2 !w-[350px] smallLaptop:!w-full"
                         container="tablet:px-6"
+                        disabled={user?.referredBy ? true : false}
                         inputClassName="placeholder:text-sm border-black"
                         name="referredBy"
                         placeholder="Enter the referal email"
