@@ -69,7 +69,7 @@ const Referals = () => {
   return (
     <div className="pl-4 bigLaptop:pl-[48px]">
       <TopBar />
-      <div>
+      <div className="overflow-x-scroll">
         {loading ? (
           <div className="w-full grid place-content-center pt-12">
             <div className="flex items-center">

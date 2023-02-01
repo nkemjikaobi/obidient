@@ -64,7 +64,7 @@ const TokenSales = () => {
 
   const finalData: any = useMemo(() => allTransactions, [allTransactions]);
   return (
-    <div>
+    <div className="overflow-x-scroll">
       {loading ? (
         <div className="w-full grid place-content-center pt-12">
           <div className="flex items-center">
