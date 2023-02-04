@@ -28,6 +28,7 @@
     "@types/uuid": "^9.0.0",
     "@walletconnect/web3-provider": "^1.7.8",
     "axios": "^1.2.2",
+    "country-state-city": "^3.1.2",
     "eslint": ">=5.16.0",
     "eslint-config-next": "13.1.1",
     "eslint-config-prettier": "^8.6.0",

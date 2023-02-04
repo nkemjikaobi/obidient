@@ -58,15 +58,23 @@ const PaymentStatus = () => {
 
           <div className="px-6">
             <h1 className="font-bold text-24 text-center mt-8 tablet:text-40">{status ? "Payment Success" : "Payment Failed"}</h1>
-            <p className="text-center text-14 mt-2 leading-5 tablet:text-16">
-              Your payment of {paymentDetails?.currency} {Number(paymentDetails?.amount / 100).toLocaleString()} for registration services by {paymentDetails?.metadata?.first_name}{" "}
-              {paymentDetails?.metadata?.last_name} has been {status ? "confirmed" : "declined"}
-            </p>
+            {status ? (
+              <p className="text-center text-14 mt-2 leading-5 tablet:text-16">
+                Your payment of {paymentDetails?.currency} {Number(paymentDetails?.amount / 100).toLocaleString()} for registration services by{" "}
+                {paymentDetails?.metadata?.first_name} {paymentDetails?.metadata?.last_name} has been {status ? "confirmed" : "declined"}
+              </p>
+            ) : (
+              <p className="text-center text-14 mt-2 leading-5 tablet:text-16">Your payment has been declined</p>
+            )}
             <div className="flex justify-between mt-8 text-12 tablet:text-14">
               <p>Date</p>
               <p>{changeDateFormat(paymentDetails?.paidAt, "DD MMM YYYY - LT")}</p>
             </div>
-            <p className={`p-4 bg-[#E8F3F9] rounded-md text-10 mt-4 font-bold tablet:text-14 text-center text-[#093851] uppercase`}>ORDER REFERENCE: {paymentDetails?.reference}</p>
+            {status && (
+              <p className={`p-4 bg-[#E8F3F9] rounded-md text-10 mt-4 font-bold tablet:text-14 text-center text-[#093851] uppercase`}>
+                ORDER REFERENCE: {paymentDetails?.reference}
+              </p>
+            )}
             <div className=" mt-6">
               <h1 className="text-citiBlue-400 text-12 font-bold tablet:text-10">PAYMENT DETAILS</h1>
               <div>
