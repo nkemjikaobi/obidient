@@ -1,6 +1,8 @@
+import axios from "axios";
+import { State } from "country-state-city";
 import { Form, Formik, FormikProps } from "formik";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import { useDropzone } from "react-dropzone";
 import { showToast } from "src/helpers/showToast";
@@ -31,6 +33,19 @@ const MembershipForm = () => {
   });
   const [departureDate, setDepartureDate] = useState<any>(null);
   const [kycData, setKycData] = useState<any>();
+  const [allStates, setAllStates] = useState([]);
+  const [allLgas, setAllLgas] = useState([]);
+  const [allWards, setAllWards] = useState([]);
+  const [allPollingUnits, setAllPollingUnits] = useState([]);
+  const [selectedState, setSelectedState] = useState("");
+  const [selectedLga, setSelectedLga] = useState("");
+  const [selectedWard, setSelectedWard] = useState("");
+  const [, setSelectedPollingUnit] = useState("");
+  const [stateLoading, setStateLoading] = useState<boolean>(false);
+  const [lgaLoading, setLgaLoading] = useState<boolean>(false);
+  const [wardLoading, setWardLoading] = useState<boolean>(false);
+  const [pollingLoading, setPollingloading] = useState<boolean>(false);
+
   const { user, membershipRegistration, loading } = useAuth();
 
   const router = useRouter();
@@ -49,6 +64,36 @@ const MembershipForm = () => {
       uploadImage(acceptedFiles);
     }
   }, [acceptedFiles]);
+
+  // Fetch states of selected country
+  useEffect(() => {
+    fetchStatesForSelectedCountry("NG");
+  }, []);
+
+  // Fetch local government when it is Ogun State
+  useEffect(() => {
+    if (selectedState === "OG") {
+      fetchLGASInOgunState();
+    } else {
+      setSelectedState("");
+    }
+  }, [selectedState]);
+
+  useEffect(() => {
+    if (selectedLga) {
+      fetchWardsInAParticularLGA(selectedLga);
+    } else {
+      setSelectedLga("");
+    }
+  }, [selectedLga]);
+
+  useEffect(() => {
+    if (selectedWard) {
+      fetchPollingUnitsInAWard(selectedWard);
+    } else {
+      setSelectedWard("");
+    }
+  }, [selectedWard]);
 
   useEffect(() => {
     if (fileRejections.length > 0) {
@@ -71,6 +116,74 @@ const MembershipForm = () => {
     pollingUnit: user?.pollingUnit,
     kycType: user?.kycType || "nin",
     kycNumber: "",
+  };
+
+  const fetchLGASInOgunState = async () => {
+    setLgaLoading(true);
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    try {
+      const res = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/location/lga`, { state: "OGUN" }, config);
+      const updatedLgas: any = res.data.data.map((lga: any) => ({
+        text: lga.lga,
+        value: lga.lga,
+        ...lga,
+      }));
+      setAllLgas(updatedLgas);
+    } catch (error) {}
+    setLgaLoading(false);
+  };
+
+  const fetchWardsInAParticularLGA = async (lga: string) => {
+    setWardLoading(true);
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    try {
+      const res = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/location/ward`, { lga }, config);
+      const updatedWards: any = res.data.data.map((ward: any) => ({
+        text: ward.ra,
+        value: ward.ra,
+        ...ward,
+      }));
+      setAllWards(updatedWards);
+    } catch (error) {}
+    setWardLoading(false);
+  };
+
+  const fetchPollingUnitsInAWard = async (ward: string) => {
+    setPollingloading(true);
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    try {
+      const res = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/location/polling-units`, { ward }, config);
+      const updatedPolling: any = res.data.data.map((polling: any) => ({
+        text: polling.pollingUnitName,
+        value: polling.pollingUnitName,
+        ...polling,
+      }));
+      setAllPollingUnits(updatedPolling);
+    } catch (error) {}
+    setPollingloading(false);
+  };
+
+  const fetchStatesForSelectedCountry = (countryCode: string) => {
+    setStateLoading(true);
+    const updatedStates: any = State.getStatesOfCountry(countryCode).map((state) => ({
+      text: state.name,
+      value: state.isoCode,
+      ...state,
+    }));
+    setAllStates(updatedStates);
+    setStateLoading(false);
   };
 
   interface Values {
@@ -99,10 +212,10 @@ const MembershipForm = () => {
     occupation: Yup.string().min(2, "Too Short!").max(50, "Too Long!").required(errorMessages.required),
     stateOfResidence: Yup.string().min(2, "Too Short!").max(50, "Too Long!").required(errorMessages.required),
     residentialAddress: Yup.string().min(2, "Too Short!").max(50, "Too Long!").required(errorMessages.required),
-    lga: Yup.string().min(2, "Too Short!").max(50, "Too Long!").required(errorMessages.required),
-    ward: Yup.string().min(2, "Too Short!").max(50, "Too Long!").required(errorMessages.required),
+    lga: Yup.string().min(2, "Too Short!").required(errorMessages.required),
+    ward: Yup.string().min(2, "Too Short!").required(errorMessages.required),
     lastName: Yup.string().min(2, "Too Short!").max(50, "Too Long!").required(errorMessages.required),
-    pollingUnit: Yup.string().min(2, "Too Short!").max(50, "Too Long!").required(errorMessages.required),
+    pollingUnit: Yup.string().min(2, "Too Short!").required(errorMessages.required),
     kycType: Yup.string().min(2, "Too Short!").max(50, "Too Long!").required(errorMessages.required),
     kycNumber: Yup.string().min(2, "Too Short!").max(50, "Too Long!").required(errorMessages.required),
   });
@@ -285,14 +398,25 @@ const MembershipForm = () => {
                       />
                     </div>
                     <div className="w-[50%]">
-                      <CustomLabel className="mb-[0.438rem] text-14 text-obiGray-320" title="State of Residence" />
-                      <FormikCustomInput
+                      <CustomLabel className="mb-[0.438rem] text-14 text-obiGray-320" title={`${wardLoading ? "Fetching data" : "State of Residence"}`} />
+                      {/* <FormikCustomInput
                         className="border border-glass-450 rounded-[0.313rem] h-[3.75rem] mr-4 mt-2 "
                         container="tablet:px-6"
                         inputClassName="placeholder:text-sm border-black"
                         name="stateOfResidence"
                         placeholder="Lagos"
                         type="text"
+                      /> */}
+                      <FormikCustomSelect
+                        className="rounded-md !h-[3.75rem]"
+                        name="stateOfResidence"
+                        onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                          props.setFieldValue("stateOfResidence", e.target.value);
+                          setSelectedState(e.target.value);
+                        }}
+                        options={allStates}
+                        parentContainer="!border  !border-glass-450 !mt-2"
+                        placeholder={`${stateLoading ? "Fetching data" : "Select State"}`}
                       />
                     </div>
                   </div>
@@ -311,39 +435,81 @@ const MembershipForm = () => {
                   </div>
                   <div className="flex items-center space-x-4 mt-8">
                     <div className="w-[50%]">
-                      <CustomLabel className="mb-[0.438rem] text-14 text-obiGray-320" title="Local Government" />
-                      <FormikCustomInput
-                        className="border border-glass-450 rounded-[0.313rem] h-[3.75rem] mr-4 mt-2"
-                        container="tablet:px-6"
-                        inputClassName="placeholder:text-sm border-black"
-                        name="lga"
-                        placeholder="Ikeja"
-                        type="text"
-                      />
+                      <CustomLabel className="mb-[0.438rem] text-14 text-obiGray-320" title={`${lgaLoading ? "Fetching data" : "Local Government"}`} />
+                      {selectedState !== "" ? (
+                        <FormikCustomSelect
+                          className="rounded-md !h-[3.75rem]"
+                          name="lga"
+                          onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                            props.setFieldValue("lga", e.target.value);
+                            setSelectedLga(e.target.value);
+                          }}
+                          options={allLgas}
+                          parentContainer="!border  !border-glass-450 !mt-2"
+                          placeholder={`${lgaLoading ? "Fetching data" : "Select Lga"}`}
+                        />
+                      ) : (
+                        <FormikCustomInput
+                          className="border border-glass-450 rounded-[0.313rem] h-[3.75rem] mr-4 mt-2"
+                          container="tablet:px-6"
+                          inputClassName="placeholder:text-sm border-black"
+                          name="lga"
+                          placeholder="Ikeja"
+                          type="text"
+                        />
+                      )}
                     </div>
                     <div className="w-[50%]">
-                      <CustomLabel className="mb-[0.438rem] text-14 text-obiGray-320" title="Ward" />
-                      <FormikCustomInput
-                        className="border border-glass-450 rounded-[0.313rem] h-[3.75rem] mr-4 mt-2"
-                        container="tablet:px-6"
-                        inputClassName="placeholder:text-sm border-black"
-                        name="ward"
-                        placeholder="Ikate"
-                        type="text"
-                      />
+                      <CustomLabel className="mb-[0.438rem] text-14 text-obiGray-320" title={`${wardLoading ? "Fetching data" : "Ward"}`} />
+                      {selectedState !== "" ? (
+                        <FormikCustomSelect
+                          className="rounded-md !h-[3.75rem]"
+                          name="ward"
+                          onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                            props.setFieldValue("ward", e.target.value);
+                            setSelectedWard(e.target.value);
+                          }}
+                          options={allWards}
+                          parentContainer="!border  !border-glass-450 !mt-2"
+                          placeholder={`${wardLoading ? "Fetching data" : "Select Ward"}`}
+                        />
+                      ) : (
+                        <FormikCustomInput
+                          className="border border-glass-450 rounded-[0.313rem] h-[3.75rem] mr-4 mt-2"
+                          container="tablet:px-6"
+                          inputClassName="placeholder:text-sm border-black"
+                          name="ward"
+                          placeholder="Ikate"
+                          type="text"
+                        />
+                      )}
                     </div>
                   </div>
                   <div className="flex items-center space-x-4 mt-8">
-                    <div className="w-full">
-                      <CustomLabel className="mb-[0.438rem] text-14 text-obiGray-320" title="Polling Unit" />
-                      <FormikCustomInput
-                        className="border border-glass-450 rounded-[0.313rem] h-[3.75rem] mr-4 mt-2 "
-                        container="tablet:px-6"
-                        inputClassName="placeholder:text-sm border-black"
-                        name="pollingUnit"
-                        placeholder="Gwagalada"
-                        type="text"
-                      />
+                    <div className="w-full !mb-12">
+                      <CustomLabel className="mb-[0.438rem] text-14 text-obiGray-320" title={`${pollingLoading ? "Fetching data" : "Polling Unit"}`} />
+                      {selectedState !== "" ? (
+                        <FormikCustomSelect
+                          className="rounded-md !h-[3.75rem]"
+                          name="pollingUnit"
+                          onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                            props.setFieldValue("pollingUnit", e.target.value);
+                            setSelectedPollingUnit(e.target.value);
+                          }}
+                          options={allPollingUnits}
+                          parentContainer="!border  !border-glass-450 !mt-2"
+                          placeholder={`${pollingLoading ? "Fetching data" : "Select Polling Unit"}`}
+                        />
+                      ) : (
+                        <FormikCustomInput
+                          className="border border-glass-450 rounded-[0.313rem] h-[3.75rem] mr-4 mt-2 "
+                          container="tablet:px-6"
+                          inputClassName="placeholder:text-sm border-black"
+                          name="pollingUnit"
+                          placeholder="Gwagalada"
+                          type="text"
+                        />
+                      )}
                     </div>
                   </div>
                 </div>
